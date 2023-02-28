@@ -1,0 +1,26 @@
+body {
+  background-image: url(a.jpg);
+  background-repeat: no-repeat;
+  display: block;
+  background-size: 100%;
+}
+.enter_details {
+  width: 350px;
+  height: 350px;
+  background-color: white;
+  margin-left: 700px;
+  margin-top: 150px;
+  border-radius: 5%;
+  display: inline-flex;
+  flex-direction: column;
+}
+h5 {
+  margin-left: 100px;
+  margin-top: 10px;
+}
+.mb-3 {
+  margin: 7%;
+}
+.form-label {
+  margin-left: 120px;
+}

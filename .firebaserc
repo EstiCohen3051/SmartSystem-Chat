@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "chat-smartsystem-1dac2"
+  },
+  "targets": {
+    "chat-smartsystem-1dac2": {
+      "hosting": {
+        "Front": [
+          "chat-smartsystem-1dac2"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
