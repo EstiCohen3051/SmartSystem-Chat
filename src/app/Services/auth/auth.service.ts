@@ -7,8 +7,6 @@ import { IdTokenResult, User } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 import { UserService } from '../user/user.service';
 import { BehaviorSubject, Subject, Observable } from 'rxjs';
-//import { Observable } from '@firebase/util';
-import { Auth, signInAnonymously } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +35,8 @@ export class AuthService {
         this.IsLoggedIn$.next(false)
       }
     })
-   
-    
+
+
   }
   //התחברות עם גוגל- בחירת חשבון
   public singInWithGoogle() {
@@ -50,17 +48,21 @@ export class AuthService {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user')
       this.router.navigate(["/"])
-      //error
-    //  this.userDetails$.next(undefined);
+      this.userDetails$.next(undefined);
     })
   }
   //אם המשתמש מחובר
   public isLoggedIn(): Observable<boolean> {
     return this.IsLoggedIn$.asObservable()
   }
+  public getUserDate(): Observable<User>{
+    return this.userDetails$.asObservable();
+  }
   private authLogin(provider: firebase.auth.AuthProvider) {
     return this.afAuth.signInWithPopup(provider).then(res => {
-      this.setUserData(<User>res.user)
+      this.IsLoggedIn$.next(true);
+      this.setUserData(<User>res.user);
+      this.router.navigate(['chat'])
     })
   }
 
@@ -75,16 +77,8 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      phoneNumber: ""
-      
-      //מפה לא אמור להיות
-     
-      //עד כאן
     };
-    debugger;
-    alert(JSON.stringify(userData));
     return userRef.set(userData, {
-      
       merge: true
     })
   }

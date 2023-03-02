@@ -32,7 +32,10 @@ import { RoomListComponent } from './Components/room-list/room-list.component';
 import { AddRoomComponent } from './Components/add-room/add-room.component';
 import { HomeComponent } from './Components/home/home.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import { ChatComponent } from './Components/chat/chat.component'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { PageNotFoundComponent } from './Components/page-not-found/page-not-foun
     AddRoomComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ChatComponent,
+    
     ],
 
   imports: [
@@ -58,8 +63,9 @@ import { PageNotFoundComponent } from './Components/page-not-found/page-not-foun
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatToolbarModule,
-  
-
+    MatSidenavModule,
+    MatListModule,BrowserModule, 
+    FormsModule, 
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

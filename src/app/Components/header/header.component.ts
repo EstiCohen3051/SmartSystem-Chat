@@ -11,9 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   // | undefined להוריד את 
-   public isLoggedIn$: Observable<boolean> | undefined;
+  public isLoggedIn$!: Observable<boolean>;
   constructor(private autService: AuthService) {
- //  this.isLoggedIn$ = autService.isLoggedIn();
+    this.isLoggedIn$! = autService.isLoggedIn();
   }
  
   ngOnInit(): void {

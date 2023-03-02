@@ -4,9 +4,9 @@
     <span>Smart system CHAT</span>
     <span class="header__spacer"></span>
 
-    <button mat-raised-button (click)="LoginWithGoogle()">
-     <!-- *ngIf="!(isLoggedIn$|async);else loggedIn"  -->
-     
+    <button mat-raised-button (click)="LoginWithGoogle()"
+     *ngIf="!(isLoggedIn$|async);else loggedIn">
+      
       login
     </button>
     <ng-template #loggedIn>
