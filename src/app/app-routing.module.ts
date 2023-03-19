@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: "chat/:roomId",
     component: ChatContainerComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService],
   },
   {
     path: '',
@@ -32,10 +32,8 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: ''
+    redirectTo: '',
   }
-
-
 ];
 
 @NgModule({

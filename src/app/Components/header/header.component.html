@@ -5,8 +5,8 @@
     <span class="header__spacer"></span>
 
     <button mat-raised-button (click)="LoginWithGoogle()"
-     *ngIf="!(isLoggedIn$|async);else loggedIn">
-      
+     *ngIf="!(isLoggedIn$|async);else loggedIn"
+      >
       login
     </button>
     <ng-template #loggedIn>

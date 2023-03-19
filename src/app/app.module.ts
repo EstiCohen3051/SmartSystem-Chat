@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,15 +16,9 @@ import { provideFirestore, getFirestore, FirestoreModule } from '@angular/fire/f
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { providePerformance, getPerformance } from '@angular/fire/performance';
-import { provideRemoteConfig, getRemoteConfig } from '@angular/fire/remote-config';
-import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './material/material.module';
-import { list } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire/compat'
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { HeaderComponent } from './Components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar'; 
 import { StartComponent } from './Components/start/start.component';
 import { LoginComponent } from './Components/login/login.component';
@@ -36,6 +31,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { ChatComponent } from './Components/chat/chat.component'; 
 import { FormsModule } from '@angular/forms';
+import 'rxjs/add/observable/of';
+import { HeaderComponent } from './Components/header/header.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import {Observable, throwError} from 'rxjs'
 
 @NgModule({
   declarations: [
@@ -50,10 +49,10 @@ import { FormsModule } from '@angular/forms';
     PageNotFoundComponent,
     ChatComponent,
     
+    
     ],
 
   imports: [
-    BrowserModule,
     FirestoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -64,8 +63,10 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule,BrowserModule, 
+    MatListModule, 
     FormsModule, 
+    BrowserModule,
+    MatFormFieldModule
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

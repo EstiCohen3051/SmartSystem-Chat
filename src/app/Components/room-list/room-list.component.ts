@@ -7,8 +7,11 @@ import { IChatRoom } from 'src/app/Models';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent implements OnInit {
+ 
   @Input() rooms: Array<IChatRoom> = [];
-    constructor(){}
+ 
+  constructor() { }
+ 
   ngOnInit(): void {
   }
 
