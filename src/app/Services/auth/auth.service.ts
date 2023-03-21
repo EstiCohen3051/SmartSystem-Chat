@@ -66,8 +66,6 @@ export class AuthService {
 
   private setUserData(user?: User): Promise<void> | void {
     if (!user) return
-       debugger;
-
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     )
@@ -81,8 +79,9 @@ export class AuthService {
     };
     return userRef.set(userData, {
       merge: true
-    })
+    });
   }
+
 }
 
 

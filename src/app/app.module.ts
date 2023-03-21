@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,6 +34,8 @@ import 'rxjs/add/observable/of';
 import { HeaderComponent } from './Components/header/header.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {Observable, throwError} from 'rxjs'
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,6 @@ import {Observable, throwError} from 'rxjs'
     HomeComponent,
     PageNotFoundComponent,
     ChatComponent,
-    
-    
     ],
 
   imports: [
@@ -66,7 +65,10 @@ import {Observable, throwError} from 'rxjs'
     MatListModule, 
     FormsModule, 
     BrowserModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDialogModule,
+  
   ],
   providers: [
     ScreenTrackingService, UserTrackingService

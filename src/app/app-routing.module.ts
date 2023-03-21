@@ -33,6 +33,11 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: '',
+  },
+  {
+    path: 'signUp',
+    component:LoginComponent
+    
   }
 ];
 

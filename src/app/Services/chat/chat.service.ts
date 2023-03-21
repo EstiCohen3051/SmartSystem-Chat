@@ -27,7 +27,7 @@ export class ChatService {
           })
         })
       );
-    }
+  }
   public getRoomMessages(roomId: string): Observable<Array<IMessage>> {
     return this._db
       .collection('rooms')
@@ -47,18 +47,24 @@ export class ChatService {
       );
   }
 
-  // public addRoom(roomName: string, userId: string): void {
-  //   this._db.collection("rooms").add({
-  //     roomName,
-  //     createUserId: userId,
-  //   })
-  // }
-  // public sendMessage(userId: string, body: string, roomId: string): void {
-  //   this._db.collection('rooms').doc(roomId).collection('messages').add({
-  //     body,
-  //     userId,
-  //     timestamp: new Date().getTime(),
-  //   })
-
-  // }
+  public addRoom(roomName: string, userId: string): void {
+    this._db.collection("rooms").add({
+      roomName,
+      createUserId: userId,
+    })
+  }
+  public addUser(displayName: string, email: string, photoURL: string): void {
+    this._db.collection("users").add({
+      displayName,
+      email,
+      photoURL: ""
+    })
+  }
+  public sendMessage(userId: string, body: string, id: string): void {
+    this._db.collection('rooms').doc(id).collection('messages').add({
+      body,
+      userId,
+      timestamp: new Date().getTime(),
+    })
+  }
 }

@@ -1,20 +1,32 @@
+<router-outlet>
 <div class="header">
-  <mat-toolbar color="primary">
-
-    <span>Smart system CHAT</span>
-    <span class="header__spacer"></span>
-
-    <button mat-raised-button (click)="LoginWithGoogle()"
-     *ngIf="!(isLoggedIn$|async);else loggedIn"
-      >
-      login
+  <mat-toolbar color="white">
+    <button  mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn">
+      כניסת משתמש
     </button>
+    <button mat-stroked-button color="orange" (click)="openSingUp()">
+      הרשמה
+    </button> 
+    <button mat-stroked-button color="orange">
+        דף הבית
+      </button><button mat-stroked-button color="orange">
+        צור קשר
+      </button>
+      <button mat-stroked-button color="orange">
+        דף הבית
+      </button>
     <ng-template #loggedIn>
       <a class="header__link" [routerLink]="['/chat']" routerLinkActive="routerLinkActive"> Chat</a>
 
       <button mat-raised-button (click)="signOut()">
-        logout
+        יציאה
       </button>
+     
     </ng-template>
+    <span class="header__spacer"></span>
+    <span>Smart system</span>
+    <!-- <img src='logo.jpg' width="50px" height="50px"/> -->
+
   </mat-toolbar>
 </div>
+</router-outlet>
