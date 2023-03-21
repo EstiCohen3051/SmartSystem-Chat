@@ -12,8 +12,10 @@ import { BehaviorSubject, Subject, Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private IsLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  private userDetails$: Subject<User> = new Subject<User>()
+  private IsLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private userDetails$: Subject<User> = new Subject<User>();
+  private userId: string = "";
+
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
@@ -29,7 +31,8 @@ export class AuthService {
         this.userDetails$.next(<User>user);
         const userString: string = JSON.stringify(user)
         localStorage.setItem('user', userString);
-        this.IsLoggedIn$.next(true)
+        this.IsLoggedIn$.next(true);
+        this.userId = user.uid;
       } else {
         localStorage.removeItem('user');
         this.IsLoggedIn$.next(false);
@@ -55,6 +58,9 @@ export class AuthService {
 
   public getUserDate(): Observable<User> {
     return this.userDetails$.asObservable();
+  }
+  public getUserId(): string{
+    return this.userId;
   }
   private authLogin(provider: firebase.auth.AuthProvider) {
     return this.afAuth.signInWithPopup(provider).then(res => {

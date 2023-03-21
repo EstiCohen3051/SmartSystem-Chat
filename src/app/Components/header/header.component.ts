@@ -32,11 +32,8 @@ export class HeaderComponent implements OnInit {
     this.autService.singOut();
   }
   public openSingUp(): void {
-    debugger;
-
     const dialogRef = this.dialog.open(LoginComponent, { width: '500px', });
     dialogRef.afterClosed().subscribe((result) => {
-      debugger;
       // this.onAddUser(result,);
     });
   }

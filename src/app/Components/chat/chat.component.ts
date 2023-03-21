@@ -1,6 +1,7 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IMessage } from 'src/app/Models';
+import { AuthService } from 'src/app/Services/auth/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -16,15 +17,20 @@ export class ChatComponent implements OnInit {
     this._messages = messages.sort((x, y) => {
       return x.timestamp - y.timestamp;
     });
-    this.virtualScroll?.scrollToIndex(this._messages.length-1)
+    this.virtualScroll?.scrollToIndex(this._messages.length-1);
   }
   private _messages: Array<IMessage> = [];
+  
+  public userId: string;
   get messages() {
     return this._messages;
   }
-  constructor() { }
+  constructor(private authService: AuthService) {
+    this.userId = authService.getUserId();
+   }
+
   ngOnInit(): void {
-    console.log('messages:', this.messages)
+    console.log( this.userId )
   }
   public sendMessage(message: string,input:HTMLInputElement): void {
     //קריאת שרת לסי שארפ

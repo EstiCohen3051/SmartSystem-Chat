@@ -46,7 +46,6 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
         })
     )
     // this.subscription.add(router.events.subscribe((data) => {
-    //   console.log(data);
     // }))
   }
 
@@ -81,7 +80,6 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('the r:', result);
       this.onAddRoom(result, this.userId);
     });
   }
