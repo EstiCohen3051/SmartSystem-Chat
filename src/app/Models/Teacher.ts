@@ -1,4 +1,4 @@
-class Teacher {
+ export class Teacher {
   Teacher_sId: string;
   Teacher_sName: string;
   Teacher_sLastName: string;
@@ -23,5 +23,7 @@ class Teacher {
     this.Teacher_sEmail = Teacher_sEmail;
     this.Teacher_sPassword = Teacher_sPassword;
     this.Teacher_sPhone = Teacher_sPhone;
+
+    
   }
 }

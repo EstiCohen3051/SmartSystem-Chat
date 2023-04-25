@@ -45,8 +45,7 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
           }
         })
     )
-    // this.subscription.add(router.events.subscribe((data) => {
-    // }))
+   
   }
 
   ngOnInit(): void {

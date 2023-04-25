@@ -1,12 +1,28 @@
 .chat-container{
     display: flex;
+    direction: rtl;
     &__room-list{
         width: 14rem;
         margin-right: 2rem;
+        text-align: center;
+        
+    display: flex;
     }
     &__add-room{
      position: fixed;
      bottom: 4rem;
-     right: 4rem;   
+     right: 4rem;  
+     display: block; 
     }
+}
+.mat-mdc-list-option .mdc-radio__outer-circle {
+    /* position: absolute; */
+    top: 0;
+    /* left: 0; */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* border-width: 2px; */
+    /* border-style: solid; */
+    /* border-radius: 50%; */
 }

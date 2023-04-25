@@ -1,13 +1,14 @@
 <router-outlet>
-<div class="header">
-  <mat-toolbar color="white">
-    <button  mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn">
-      כניסת משתמש
-    </button>
-    <button mat-stroked-button color="orange" (click)="openSingUp()">
-      הרשמה
-    </button> 
-    <button mat-stroked-button color="orange">
+  <div class="header">
+    <mat-toolbar color="white">
+      <button mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn">
+        כניסת משתמש
+      </button>
+      <button mat-stroked-button color="orange" (click)="openEnrollment()">
+        <!-- routerLink="enrollment" -->
+        הרשמה
+      </button>
+      <button mat-stroked-button color="orange">
         דף הבית
       </button><button mat-stroked-button color="orange">
         צור קשר
@@ -15,18 +16,16 @@
       <button mat-stroked-button color="orange">
         דף הבית
       </button>
-    <ng-template #loggedIn>
-      <a class="header__link" [routerLink]="['/chat']" routerLinkActive="routerLinkActive"> Chat</a>
+      <ng-template #loggedIn>
+        <a class="header__link" [routerLink]="['/chat']" routerLinkActive="routerLinkActive"> Chat</a>
+        <button mat-raised-button (click)="signOut()">
+          יציאה
+        </button>
 
-      <button mat-raised-button (click)="signOut()">
-        יציאה
-      </button>
-     
-    </ng-template>
-    <span class="header__spacer"></span>
-    <span>Smart system</span>
-    <!-- <img src='logo.jpg' width="50px" height="50px"/> -->
-
-  </mat-toolbar>
-</div>
+      </ng-template>
+      <span class="header__spacer"></span>
+      <span>Smart system</span>
+      <!-- <img src='logo.jpg' width="50px" height="50px"/> -->
+    </mat-toolbar>
+  </div>
 </router-outlet>

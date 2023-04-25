@@ -1,0 +1,23 @@
+.form-container {
+    //display: flex;
+   // flex-direction: column;
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+ 
+  #d{
+    margin-left: 40px;
+    margin-top: 10px;
+    margin-right: 15px;
+    width: 170px;
+    height: 70px;
+    display: inline-block;
+  }
+  .fieldC{
+  height: 70px;
+  width: 200px;
+  margin:30px;
+  margin-top: 0px;
+}

@@ -6,6 +6,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { StartComponent } from './Components/start/start.component';
 import { AuthGuardService } from './Services/auth-guard/auth-guard.service';
+import { EnrollmentComponent } from './Components/enrollment/enrollment.component';
 const routes: Routes = [
   //   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // {
@@ -27,17 +28,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: '',
-    component: HomeComponent
+    path: 'enrollment',
+    component: EnrollmentComponent
   },
-  {
-    path: "**",
-    redirectTo: '',
-  },
+
   {
     path: 'signUp',
     component:LoginComponent
     
+  },
+  {
+    path: "**",
+    redirectTo: 'HomeComponent',
   }
 ];
 

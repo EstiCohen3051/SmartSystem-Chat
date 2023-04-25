@@ -1,6 +1,6 @@
 type NewType = string;
 
-class Manager {
+export class Manager {
   ManagerId: string;
   ManagerName: string;
   ManagerLastName: string;

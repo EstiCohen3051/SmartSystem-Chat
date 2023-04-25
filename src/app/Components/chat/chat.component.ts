@@ -9,32 +9,30 @@ import { AuthService } from 'src/app/Services/auth/auth.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-   @ViewChild("virtualScroll") virtualScroll?: CdkVirtualScrollViewport;
-
-   @Output() onSendMessage: EventEmitter<string> = new EventEmitter();
-
+  @ViewChild("virtualScroll") virtualScroll?: CdkVirtualScrollViewport;
+  @Output() onSendMessage: EventEmitter<string> = new EventEmitter();
   @Input() set messages(messages: Array<IMessage>) {
     this._messages = messages.sort((x, y) => {
       return x.timestamp - y.timestamp;
     });
-    this.virtualScroll?.scrollToIndex(this._messages.length-1);
+    this.virtualScroll?.scrollToIndex(this._messages.length - 1);
   }
   private _messages: Array<IMessage> = [];
-  
   public userId: string;
   get messages() {
     return this._messages;
   }
   constructor(private authService: AuthService) {
     this.userId = authService.getUserId();
-   }
-
-  ngOnInit(): void {
-    console.log( this.userId )
   }
-  public sendMessage(message: string,input:HTMLInputElement): void {
-    //קריאת שרת לסי שארפ
+  ngOnInit(): void {
+    console.log(this.userId)
+  }
+  public sendMessage(message: string, input: HTMLInputElement): void {
+    console.log(this.messages);
     this.onSendMessage.emit(message);
-    input.value = " ";
+    console.log(message + " message");
+    console.log(this.userId + " send");
+    input.value = "";
   }
 }

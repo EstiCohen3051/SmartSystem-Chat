@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,7 +9,16 @@ import { IChatRoom, IMessage } from 'src/app/Models';
   providedIn: 'root'
 })
 export class ChatService {
-  constructor(private _db: AngularFirestore) { }
+  constructor(
+    private _db: AngularFirestore,
+    private httpClient: HttpClient
+  ) { }
+    onSendMessage(message:string,userId:string){
+      return this.httpClient.get<IMessage>(
+           `https://localhost:44362/api/getMessage/getMessage/${message}/${userId}`)
+    }
+  
+  
   arr: Array<IChatRoom> = new Array<IChatRoom>()
 
   public getRooms(): Observable<Array<IChatRoom>> {
