@@ -2,10 +2,30 @@
 <!-- <router-outlet></router-outlet> -->
 
 <!-- <img [src]="src" width="100%" height="590vh" alt="" srcset="" /> -->
-<div class="app">
+<div class="app" style="direction: unset;">
     <app-header></app-header>
-    <main>
-        <router-outlet> 
+    <main >
+        <router-outlet>
+            <!-- <img src="home.jpg" alt="" style="width: 100%; height: 790px;"> -->
+            <footer style="background-color: antiquewhite;width: 100%;height: 350px;">
+                <div class="story">
+                    <br> <br>
+                    <b> Smart- system </b> <br>
+                    הינה מערכת חדשנית ומתקדמת שצמחה <br>
+                    בין כותלי בית הספר המציעה פתרון טכנולוגי <br>
+                    חדשני. נותנת מענה לאתגרים ולצרכים של <br>
+                    בתי הספר בעידן המודרני מאפשר למורה<br>
+                    . נוחה יותר ולמנהל להתנהל לתקשר בצורה <br>
+                    <br><br>
+                    ...הצטרפו אלינו                     <br>
+
+                    <button mat-mini-fab  style="margin: 10px;margin-top: 20px;" (click)="doPost()">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                    <input type="email" name="dsds" id="" style="width: 200px;height: 30px;border-radius: 5%;">
+
+                </div>
+            </footer>
         </router-outlet>
     </main>
 </div>

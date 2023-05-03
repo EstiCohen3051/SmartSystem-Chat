@@ -79,7 +79,10 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.onAddRoom(result, this.userId);
+      console.log({result});
+
+      this.onAddRoom(result.roomName, this.userId);
+      
     });
   }
   public onAddRoom(roomName: string, userId: string) {

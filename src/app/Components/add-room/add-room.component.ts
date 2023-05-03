@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -7,7 +8,13 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./add-room.component.scss']
 })
 export class AddRoomComponent implements OnInit{
-  constructor(public dialogRef: MatDialogRef<AddRoomComponent>) {
+  arr:string[] = ['']
+  form:FormGroup=this.formBuilder.group({
+    roomName: ['',],
+    
+
+  });
+  constructor(public dialogRef: MatDialogRef<AddRoomComponent>,private formBuilder:FormBuilder) {
     
    }
   ngOnInit(): void {

@@ -1,8 +1,9 @@
 import { IMessage } from "./";
 
-export interface IChatRoom{
+export interface IChatRoom {
     id: string,
     roomName: string,
     messages: Array<IMessage>;
-    createUserId: string
+    createUserId: string;
+    friends: string
 }

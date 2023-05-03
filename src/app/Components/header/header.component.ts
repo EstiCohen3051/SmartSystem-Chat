@@ -8,6 +8,7 @@ import { Users } from 'src/app/Models/User';
 import { user } from '@angular/fire/auth';
 import { AuthService } from 'src/app/Services/auth/auth.service';
 import { EnrollmentComponent } from '../enrollment/enrollment.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-header',
@@ -19,15 +20,23 @@ export class HeaderComponent implements OnInit {
   public TypeUser?: Users;
   email?: string;
   constructor(private chatService: ChatService, private router: Router,
-    private autService: AuthService, public dialog: MatDialog) {
+    public autService: AuthService, public dialog: MatDialog) {
     this.isLoggedIn$ = autService.isLoggedIn();
+    
+  }
+  onTabClick(tabName: string) {
+    // Handle tab click event
+    console.log('Tab clicked:', tabName);
   }
 
+  $event!:MatTabChangeEvent
   ngOnInit(): void {
 
   }
-
   public LoginWithGoogle(): void {
+   // console.log("jjj");
+    
+    //this.router.navigateByUrl('char')
     this.autService.singInWithGoogle();
   }
   openEnrollment() {

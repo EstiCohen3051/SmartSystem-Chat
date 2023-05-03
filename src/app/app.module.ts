@@ -22,16 +22,25 @@ import { PageNotFoundComponent } from './Components/page-not-found/page-not-foun
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { ChatComponent } from './Components/chat/chat.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/observable/of';
 import { HeaderComponent } from './Components/header/header.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { Observable, throwError } from 'rxjs'
+//import { Observable, throwError } from 'rxjs'
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EnrollmentComponent } from './Components/enrollment/enrollment.component';
 import { MatInputModule } from '@angular/material/input';
+import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+import { RouterModule } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
+import * as nodemailer from 'nodemailer';
+import { PermanentSystemComponent } from './Components/permanent-system/permanent-system.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,26 +54,32 @@ import { MatInputModule } from '@angular/material/input';
     PageNotFoundComponent,
     ChatComponent,
     EnrollmentComponent,
+    ContactUsComponent,
+    PermanentSystemComponent,
   ],
   imports: [
     MatFormFieldModule,
+    RouterModule,
     MatInputModule,
     FirestoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    FormsModule,
+  
     BrowserModule,
     MatFormFieldModule,
     MatButtonModule,
+    ReactiveFormsModule,
     MatDialogModule,
+
   ],
   exports: [MatFormFieldModule, MatInputModule],
   providers: [ScreenTrackingService, UserTrackingService],

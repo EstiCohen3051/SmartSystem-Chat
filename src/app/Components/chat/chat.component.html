@@ -1,24 +1,23 @@
 <div class="chat" *ngIf="messages">
-        <div class="chat__screen">
-            <div class="chat__massages">
-                <cdk-virtual-scroll-viewport appendOnly itemSize="15" class="chat__scroller" #virtualScroll
-                    style="height: 323px;">
-                    <div *cdkVirtualFor="let message of messages" class="chat__message"
-                        [ngClass]="{
+    <div class="chat__screen">
+        <div class="chat__massages">
+            <cdk-virtual-scroll-viewport appendOnly itemSize="15" class="chat__scroller" #virtualScroll
+                style="height: 323px;">
+                <div *cdkVirtualFor="let message of messages" class="chat__message" [ngClass]="{
                             'chat__message--current-user':userId===message.userId ,
-                             'chat__message--other-user':userId != message.userId}">  
-                               {{message.body}}
-                               {{message.userId}}
-                    </div>
-                </cdk-virtual-scroll-viewport>
-                <div class="chat__form">
-                    <mat-form-field class="example-full-width" style="width:970px;">
-                        <input #newMessage matInput placeholder="הודעה" />
-                    </mat-form-field>
-                    <button mat-mini-fab color="primary" (click)="sendMessage(newMessage.value,newMessage)">
-                        <mat-icon>send</mat-icon>
-                    </button>
+                             'chat__message--other-user':userId != message.userId}">
+                    {{message.body}}
+                    {{message. userId}}
                 </div>
+            </cdk-virtual-scroll-viewport>
+            <div class="chat__form">
+                <mat-form-field class="example-full-width" style="width:970px;">
+                    <input #newMessage matInput placeholder="הודעה" />
+                </mat-form-field>
+                <button mat-mini-fab color="primary" (click)="sendMessage(newMessage.value,newMessage)">
+                    <mat-icon>send</mat-icon>
+                </button>
             </div>
         </div>
     </div>
+</div>

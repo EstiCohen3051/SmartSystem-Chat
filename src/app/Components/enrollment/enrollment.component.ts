@@ -13,39 +13,59 @@ import { UserService } from 'src/app/Services/user/user.service';
 })
 export class EnrollmentComponent {
 
-  email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
-  input: any;
+  // input: any;
   teacherDetails?: Teacher;
+
+  // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  // userForm = new FormGroup({
+  //   id: new FormControl(),
+  //   // name: new FormControl,
+  //   // email: new FormControl('', [Validators.required, Validators.email])
+
+  // });
+  myGroup = new FormGroup({
+    id: new FormControl(),
+    firstName: new FormControl(),
+    lastName: new FormControl(),
+    address: new FormControl(),
+    email1: new FormControl(),
+    pass: new FormControl(),
+    tel:new FormControl()
+});
+
+  email: any;
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'חובה למלא שדה זה';
     }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? 'מייל לא תקין' : '';
   }
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  form: FormGroup = new FormGroup({
-    tel: new FormControl(),
-  });
-  constructor(public fb: FormBuilder,public authService:AuthService
-    ) {
-    this.form = this.fb.group({
-      fieldName: ['', Validators.required],
-      fieldType: ['', Validators.required],
-    });
+  constructor(public fb: FormBuilder, public authService: AuthService
+  ) {
+
   }
   openEnrollment() {
-    
+
   }
   addTeacher() {
-    this.authService.setNewTeacher(this.teacherDetails!)
-    
+    //this.teacherDetails?.Teacher_sId = this.myGroup.get('id')?.value
+    console.log(this.myGroup.get('id')?.value);
+    console.log(this.myGroup.get('firstName')?.value);
+    console.log(this.myGroup.get('address')?.value);
+    console.log(this.myGroup.get('lastName')?.value);
+    console.log(this.myGroup.get('email1')?.value);
+    console.log(this.myGroup.get('pass')?.value);
+    console.log(this.myGroup.get('tel')?.value);
+    //this.teacherDetails?.Teacher_sEmail = this.myGroup.get('email');
+   this.authService.setNewTeacher(this.teacherDetails!)
+
     // const output = document.getElementById('output');
     // if (output) output.innerHTML = this.email.toString();
-   // this.teacherDetails?.Teacher_sEmail=FormControl.
+    // this.teacherDetails?.Teacher_sEmail=FormControl.
   }
   closeDialog() {
-   // <button mat-button mat-dialog-close>Cancel</button>
+    // <button mat-button mat-dialog-close>Cancel</button>
 
   }
 }

@@ -13,3 +13,14 @@
   margin: auto;
 
 }
+
+.butt{
+  width: 450px;
+  border: none;
+  border-bottom: blue;
+height:48px ;
+
+}
+.butt::selection{
+  color: aqua;
+}

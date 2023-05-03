@@ -7,6 +7,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { StartComponent } from './Components/start/start.component';
 import { AuthGuardService } from './Services/auth-guard/auth-guard.service';
 import { EnrollmentComponent } from './Components/enrollment/enrollment.component';
+import { ContactUsComponent } from './Components/contact-us/contact-us.component';
+import { PermissionService } from './Services/permission.service';
 const routes: Routes = [
   //   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // {
@@ -29,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'enrollment',
-    component: EnrollmentComponent
+    component: EnrollmentComponent,
+    canActivate: [PermissionService]
   },
 
   {
@@ -40,7 +43,17 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: 'HomeComponent',
-  }
+  },
+  {
+    path: "contact",
+    component:ContactUsComponent
+    
+  },
+  {
+    path: "home",
+    component:HomeComponent
+    
+  },
 ];
 
 @NgModule({

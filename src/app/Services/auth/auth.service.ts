@@ -19,6 +19,7 @@ export class AuthService {
     public userEmeil: string = "";
     public type: any;
     TypeUser: any;
+    state: string = 'manager'
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -46,6 +47,11 @@ export class AuthService {
                         if (x.Manager == null && x.Teacher == null) {
                             this.router.navigateByUrl('signUp')
                         }
+                        else if (x.Manager != null) {
+                            this.state = "manager"
+                            router.navigateByUrl('manager')
+                        }
+
                         console.log(x + "login");
                     }
                 )
@@ -88,7 +94,7 @@ export class AuthService {
 
 
             this.setUserData(res.user as User);
-            this.router.navigate(['chat'])
+           // this.router.navigate(['chat'])
         })
     }
     private setUserData(user?: User): Promise<void> | void {
@@ -110,7 +116,7 @@ export class AuthService {
     setNewTeacher(newTeacher: Teacher) {
         debugger;
         console.log(newTeacher);
-        
+
         return this.http.post<boolean>(
             "https://localhost:44362/api/Enrollment/AddNewTeacher/", newTeacher
         )

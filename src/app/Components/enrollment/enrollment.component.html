@@ -1,55 +1,53 @@
-<form action="form">
+<form action="userForm">
   <h1 style="margin-top: 50px;margin-left: 200px;">הרשמה לאתר</h1>
+  <div [formGroup]="myGroup">
+
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sId" -->
 
       <mat-label>תעודת זהות </mat-label>
-      <input matInput>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <input  matInput formControlName="id" required>
+      <mat-icon matSuffix>adjust</mat-icon>
+
     </mat-form-field>
   </div>
+
+ 
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sName" -->
 
       <mat-label>שם פרטי</mat-label>
-      <input matInput>
+      <input matInput formControlName="firstName" required>
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
   </div>
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC" #lastName>
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sLastName"> -->
       <mat-label>שם משפחה </mat-label>
-      <mat-icon matSuffix>id</mat-icon>
-
-      <input matInput>
+      <mat-icon matSuffix>person_outline</mat-icon>
+            <input matInput formControlName="lastName" required>
     </mat-form-field>
   </div>
-  <div id="d">
+ <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sAddress" -->
       <mat-label>כתובת </mat-label>
-
-      <input matInput>
+      <input matInput formControlName="address" required>
       <mat-icon matSuffix>address</mat-icon>
-
     </mat-form-field>
   </div>
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC" #email123>
       <mat-label>מייל</mat-label>
-      <input matInput placeholder="pat@example.com" required>
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sEmail"  -->
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <input matInput formControlName="email1" required>
+       <!--לבדוק למה אי אפשר לשים בדיקת תקינות  -->
+      <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>   -->
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
   </div>
-  <div id="d">
+   <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sPassword" -->
       <mat-label>סיסמא</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" required>
+      <input matInput [type]="hide ? 'password' : 'text'" required formControlName="pass">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -58,16 +56,14 @@
   </div>
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
-      <!-- [(ngModel)]="teacherDetails!.Teacher_sPhone" -->
       <mat-label>מספר טלפון</mat-label>
-      <example-tel-input formControlName="tel" required></example-tel-input>
       <mat-icon matSuffix>phone</mat-icon>
-      <input matInput>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <input matInput formControlName="tel">
     </mat-form-field>
-   
-  </div>
-  <br>
+     
+  </div> 
+  <br></div>
+
   <button mat-raised-button (click)="addTeacher()" style="margin-left: 200px;margin-right: 15px; ">שליחה</button>
   <button mat-raised-button mat-dialog-close>ביטול</button>
 </form>

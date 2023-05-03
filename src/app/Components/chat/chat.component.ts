@@ -32,7 +32,7 @@ export class ChatComponent implements OnInit {
     console.log(this.messages);
     this.onSendMessage.emit(message);
     console.log(message + " message");
-    console.log(this.userId + " send");
+   alert(this.userId + " send");
     input.value = "";
   }
 }

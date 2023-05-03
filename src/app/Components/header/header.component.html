@@ -1,31 +1,52 @@
 <router-outlet>
-  <div class="header">
+
+<div class="mune" style="width: 100%; display: flex;">
+  <button mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn" class="butt">כניסת
+    משתמש</button>
+  <ng-template #loggedIn>
+    <!-- <a class="header__link" routerLink="/chat'" routerLinkActive="routerLinkActive"> Chat</a> -->
+    <button mat-stroked-button (click)="signOut()" class="butt">
+      יציאה
+    </button>
+  </ng-template>
+   <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt" (click)="openEnrollment()">הוספת
+    מורה</button>
+    <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt"  [routerLink]="['/chat']">חדרי
+      צאטים</button>
+      <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt"   [matMenuTriggerFor]="menu">
+        מערכת</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>מערכת קבועה</button>
+          <button mat-menu-item>שינויים במערכת</button>
+        </mat-menu>
+<button mat-stroked-button class="butt" [routerLink]="['/contact']">צור קשר</button>
+  <button mat-stroked-button class="butt" [routerLink]="['/home']">דף הבית</button>
+ 
+</div>
+
+<!-- <mat-tab-group style="width: 900px;">  
+  <mat-tab label=" צור קשר" routerLink="/contact"> <app-contact-us></app-contact-us> </mat-tab>
+  <mat-tab label="דף הבית">דף הבית</mat-tab>
+</mat-tab-group> -->
+<!-- <div class="header">
     <mat-toolbar color="white">
-      <button mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn">
-        כניסת משתמש
-      </button>
-      <button mat-stroked-button color="orange" (click)="openEnrollment()">
-        <!-- routerLink="enrollment" -->
-        הרשמה
+     
+      <button mat-stroked-button color="orange" (click)="openEnrollment()"> -->
+<!-- routerLink="enrollment" -->
+<!-- הרשמה
       </button>
       <button mat-stroked-button color="orange">
         דף הבית
-      </button><button mat-stroked-button color="orange">
+      </button><button mat-stroked-button color="orange" [routerLink]="['/contact']">
         צור קשר
       </button>
       <button mat-stroked-button color="orange">
         דף הבית
       </button>
-      <ng-template #loggedIn>
-        <a class="header__link" [routerLink]="['/chat']" routerLinkActive="routerLinkActive"> Chat</a>
-        <button mat-raised-button (click)="signOut()">
-          יציאה
-        </button>
-
-      </ng-template>
+     
       <span class="header__spacer"></span>
-      <span>Smart system</span>
-      <!-- <img src='logo.jpg' width="50px" height="50px"/> -->
-    </mat-toolbar>
-  </div>
+      <span>Smart system</span> -->
+<!-- <img src='logo.jpg' width="50px" height="50px"/> -->
+<!-- </mat-toolbar>
+  </div> -->
 </router-outlet>
