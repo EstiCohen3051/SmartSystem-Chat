@@ -40,7 +40,14 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import * as nodemailer from 'nodemailer';
+import { NewSystemComponent } from './Components/new-system/new-system.component';
 import { PermanentSystemComponent } from './Components/permanent-system/permanent-system.component';
+import { ChangeSystemComponent } from './Components/change-system/change-system.component';
+import { DeleteTeacherComponent } from './Components/delete-teacher/delete-teacher.component';
+import { UpdatingTeacherComponent } from './Components/updating-teacher/updating-teacher.component';
+import { ListTeacherComponent } from './Components/list-teacher/list-teacher.component';
+import { IsDisplayRoomPipe } from './Components/room-list/is-display-room.pipe';
+import { TeacherRequestsComponent } from './Components/teacher-requests/teacher-requests.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +62,14 @@ import { PermanentSystemComponent } from './Components/permanent-system/permanen
     ChatComponent,
     EnrollmentComponent,
     ContactUsComponent,
+    NewSystemComponent,
     PermanentSystemComponent,
+    ChangeSystemComponent,
+    DeleteTeacherComponent,
+    UpdatingTeacherComponent,
+    ListTeacherComponent,
+    IsDisplayRoomPipe,
+    TeacherRequestsComponent,
   ],
   imports: [
     MatFormFieldModule,
@@ -73,7 +87,7 @@ import { PermanentSystemComponent } from './Components/permanent-system/permanen
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-  
+
     BrowserModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -81,7 +95,7 @@ import { PermanentSystemComponent } from './Components/permanent-system/permanen
     MatDialogModule,
 
   ],
-  exports: [MatFormFieldModule, MatInputModule],
+  exports: [MatFormFieldModule, MatInputModule,IsDisplayRoomPipe],
   providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })

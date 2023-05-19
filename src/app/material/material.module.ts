@@ -14,11 +14,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
 
 const modules: any = [MatInputModule,MatDatepickerModule,MatNativeDateModule,
   MatFormFieldModule
   , MatIconModule, MatButtonModule, MatDialogModule, ScrollingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatOptionModule, MatInputModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatSelectModule,MatExpansionModule,MatMenuModule,MatTabsModule]
+  MatInputModule, MatSelectModule,MatExpansionModule,MatMenuModule,MatTabsModule,MatTableModule]
 
 @NgModule({
   declarations: [],

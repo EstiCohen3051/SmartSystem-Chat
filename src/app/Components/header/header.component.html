@@ -1,39 +1,66 @@
 <router-outlet>
+  <div class="mune" style="width: 100%; display: flex;  background-image: url('./image.png');">
 
-<div class="mune" style="width: 100%; display: flex;">
-  <button mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn" class="butt">כניסת
-    משתמש</button>
-  <ng-template #loggedIn>
-    <!-- <a class="header__link" routerLink="/chat'" routerLinkActive="routerLinkActive"> Chat</a> -->
-    <button mat-stroked-button (click)="signOut()" class="butt">
-      יציאה
-    </button>
-  </ng-template>
-   <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt" (click)="openEnrollment()">הוספת
-    מורה</button>
-    <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt"  [routerLink]="['/chat']">חדרי
+    <button mat-stroked-button (click)="LoginWithGoogle()" *ngIf="!(isLoggedIn$|async);else loggedIn" class="butt">כניסת
+      משתמש</button>
+    <ng-template #loggedIn>
+      <!-- <a class="header__link" routerLink="/chat'" routerLinkActive="routerLinkActive"> Chat</a> -->
+      <button mat-stroked-button (click)="signOut()" class="butt">
+        יציאה
+      </button>
+    </ng-template>
+    <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt" [matMenuTriggerFor]="menu">
+      מורים</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item class="butt" (click)="openEnrollment()">הוספת מורה</button>
+      <button mat-menu-item class="butt" [routerLink]="['/delateTeacher']">מחיקת מורה</button>
+      <button mat-menu-item class="butt" [routerLink]="['listTeacher']"> רשימת מורים</button>
+      <button mat-menu-item class="butt" (click)="openEnrollment()"> עידכון פרטי מורה</button>
+    </mat-menu>
+
+      <button mat-stroked-button class="butt"   [matMenuTriggerFor]="menuRequests"> הודעות מורים</button>
+      <mat-menu #menuRequests="matMenu">
+        <button mat-menu-item [routerLink]="['/newSystem']">העלאת מערכת חדשה</button>
+        <button mat-menu-item [routerLink]="['/permanent-system']">מערכת קבועה</button>
+        <button mat-menu-item [routerLink]="['/changeSystem']">שינויים במערכת</button>
+     
+  </mat-menu>
+    <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt" [routerLink]="['/chat']">חדרי
       צאטים</button>
-      <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt"   [matMenuTriggerFor]="menu">
-        מערכת</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>מערכת קבועה</button>
-          <button mat-menu-item>שינויים במערכת</button>
-        </mat-menu>
-<button mat-stroked-button class="butt" [routerLink]="['/contact']">צור קשר</button>
-  <button mat-stroked-button class="butt" [routerLink]="['/home']">דף הבית</button>
- 
-</div>
+    <button *ngIf="autService.state==='teacher'" mat-stroked-button class="butt" [routerLink]="['/chat']">חדרי
+      צאטים</button>
+    <button *ngIf="autService.state==='manager'" mat-stroked-button class="butt"
+      [matMenuTriggerFor]="menuSystem">מערכת</button>
+    <mat-menu #menuSystem="matMenu">
+      <button mat-menu-item [routerLink]="['/newSystem']">העלאת מערכת חדשה</button>
+      <button mat-menu-item [routerLink]="['/permanent-system']">מערכת קבועה</button>
+      <button mat-menu-item [routerLink]="['/changeSystem']">שינויים במערכת</button>
+    </mat-menu>
+    <button *ngIf="autService.state==='teacher'" mat-stroked-button class="butt"
+      [matMenuTriggerFor]="menuSystemTeacher">מערכת</button>
+    <mat-menu #menuSystemTeacher="matMenu">
+      <button mat-menu-item [routerLink]="['/permanent-system']">מערכת קבועה</button>
+      <button mat-menu-item [routerLink]="['/changeSystem']">שינויים במערכת</button>
+    </mat-menu>
+    <button mat-stroked-button class="butt" [routerLink]="['/contact']">צור קשר</button>
+    <button mat-stroked-button class="butt" [routerLink]="['/home']">דף הבית</button>
+    <button *ngIf="autService.state==='teacher'" mat-stroked-button class="butt" [routerLink]="['/contact']">צפיה
+      במערכת</button>
+    <img src="./image.png" alt="img didn't found" width="150px" height="50px">
 
-<!-- <mat-tab-group style="width: 900px;">  
+
+  </div>
+
+  <!-- <mat-tab-group style="width: 900px;">  
   <mat-tab label=" צור קשר" routerLink="/contact"> <app-contact-us></app-contact-us> </mat-tab>
   <mat-tab label="דף הבית">דף הבית</mat-tab>
 </mat-tab-group> -->
-<!-- <div class="header">
+  <!-- <div class="header">
     <mat-toolbar color="white">
      
       <button mat-stroked-button color="orange" (click)="openEnrollment()"> -->
-<!-- routerLink="enrollment" -->
-<!-- הרשמה
+  <!-- routerLink="enrollment" -->
+  <!-- הרשמה
       </button>
       <button mat-stroked-button color="orange">
         דף הבית
@@ -46,7 +73,7 @@
      
       <span class="header__spacer"></span>
       <span>Smart system</span> -->
-<!-- <img src='logo.jpg' width="50px" height="50px"/> -->
-<!-- </mat-toolbar>
+  <!-- <img src='logo.jpg' width="50px" height="50px"/> -->
+  <!-- </mat-toolbar>
   </div> -->
 </router-outlet>

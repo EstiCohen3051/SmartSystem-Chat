@@ -4,7 +4,7 @@
     <div class="chat-containner__add-room">
       <button type="button" mat-raised-button color="primary" (click)="openAddRoomModal()" style="margin: 20px;"> הוספת חדר</button>
     </div>
-      <app-room-list [rooms]="rooms">
+      <app-room-list  [rooms]="rooms">
       </app-room-list>
     </div>
     <div class="chat-contaniner__chat" *ngIf="messages$ |async as messages">
@@ -12,3 +12,5 @@
     </div>
   </div>
 </div>
+<ng-template *ngIf=""></ng-template>
+<div class="h" style="width: 150px;height: 150px; background-color: rgb(62, 109, 109);"></div>

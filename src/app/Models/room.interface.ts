@@ -5,5 +5,5 @@ export interface IChatRoom {
     roomName: string,
     messages: Array<IMessage>;
     createUserId: string;
-    friends: string
+    friends:String[]
 }

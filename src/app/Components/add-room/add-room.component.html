@@ -4,17 +4,25 @@
     <mat-form-field appearance="fill" style="width: 200px;">
       <mat-label>הכנס את שם החדר</mat-label>
       <input matInput #roomName> </mat-form-field>
-    <mat-form-field appearance="fill" *ngFor="let item of arr;let index=index">
-      <mat-label>הכנס חברים</mat-label>
-      <input [(ngModel)]="arr[index]" matInput>
-    </mat-form-field>
+    <form [formGroup]="form">
+      <mat-form-field appearance="fill" *ngFor="let item of arr;let index=index">
+        <mat-label>הכנס חברים</mat-label>
+
+        <mat-select [formControlName]="'friend'+index">
+          <mat-option *ngFor="let item of friends$ |async" [value]="item.email">{{item.email}}</mat-option>
+     
+        </mat-select>
+      </mat-form-field>
+
+
+    </form>
     <button>
-      <mat-icon  (click)="arr.push('')">person_add</mat-icon>
+      <mat-icon (click)="pushFriend()">person_add</mat-icon>
     </button>
 
   </div>
   <div mat-dialog-actions id="bu">
     <button mat-button (click)="closeModal()">ביטול</button>
-    <button mat-button [mat-dialog-close]="{roomName:roomName.value,arr}" cdkFocusInitial>הוספה</button>
+    <button mat-button [mat-dialog-close]="{roomName:roomName.value,friends:form.value}" cdkFocusInitial>הוספה</button>
   </div>
 </div>

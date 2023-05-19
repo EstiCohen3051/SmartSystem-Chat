@@ -45,18 +45,23 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
           }
         })
     )
-   
+
   }
 
   ngOnInit(): void {
+    debugger;
+
     this.subscription.add(
       this.auth
         .getUserDate()
         .pipe(filter(data => !!data))
         .subscribe(user => {
           this.userId = user.uid;
+          console.log(user.uid);
         })
+      
     );
+    console.log(this.userId);
 
     this.subscription.add(
       this.router.events
@@ -65,7 +70,7 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
             ruoterEvent instanceof ActivationEnd))
         .subscribe(data => {
           const routerEvent = data as ActivationEnd;
-           this.roomId = routerEvent.snapshot.paramMap.get("roomId") || "";
+          this.roomId = routerEvent.snapshot.paramMap.get("roomId") || "";
         })
     );
   }
@@ -79,17 +84,19 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log({result});
-
-      this.onAddRoom(result.roomName, this.userId);
-      
+      this.onAddRoom(result.roomName, this.userId, result.friends);
     });
   }
-  public onAddRoom(roomName: string, userId: string) {
-    this.chatService.addRoom(roomName, userId);
+  public onAddRoom(roomName: string, userId: string, friends: string[]) {
+    console.log(userId);
+    
+    this.chatService.addRoom(roomName, userId, Object.values(friends));
   }
   public onSendMessage(message: string): void {
     if (this.userId && this.roomId)
       this.chatService.sendMessage(this.userId, message, this.roomId)
+    this.chatService.Send(message).subscribe(res => {
+      alert(res)
+    })
   }
 }

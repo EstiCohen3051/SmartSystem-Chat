@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { IChatRoom, IMessage } from 'src/app/Models';
+import { Users } from 'src/app/Models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,12 @@ export class ChatService {
     private _db: AngularFirestore,
     private httpClient: HttpClient
   ) { }
-    onSendMessage(message:string,userId:string){
-      return this.httpClient.get<IMessage>(
-           `https://localhost:44362/api/getMessage/getMessage/${message}/${userId}`)
-    }
-  
-  
+  onSendMessage(message: string, userId: string) {
+    return this.httpClient.get<IMessage>(
+      `https://localhost:44362/api/getMessage/getMessage/${message}/${userId}`)
+  }
+
+
   arr: Array<IChatRoom> = new Array<IChatRoom>()
 
   public getRooms(): Observable<Array<IChatRoom>> {
@@ -57,10 +58,14 @@ export class ChatService {
       );
   }
 
-  public addRoom(roomName: string, userId: string): void {
+  public addRoom(roomName: string, userId: string, friends: string[]): void {
+    console.log(userId);
+    console.log(roomName, friends, userId);
+
     this._db.collection("rooms").add({
       roomName,
       createUserId: userId,
+      friends
     })
   }
   public addUser(displayName: string, email: string, photoURL: string): void {
@@ -70,11 +75,31 @@ export class ChatService {
       photoURL: ""
     })
   }
+  getAllUsers() {
+    return this._db
+      .collection('users')
+      .snapshotChanges()
+      .pipe(
+        map(messages => {
+          return messages.map(message => {
+            const data: Users = <Users>message.payload.doc.data();
+            return {
+              ...data,
+              id: message.payload.doc.id,
+            }
+          })
+        }))
+  }
   public sendMessage(userId: string, body: string, id: string): void {
     this._db.collection('rooms').doc(id).collection('messages').add({
       body,
       userId,
       timestamp: new Date().getTime(),
     })
+  }
+
+  public Send(m:string)
+  {
+    return this.httpClient.get(`https://localhost:44362/api/Messages/SendMessage?m=${m}`)
   }
 }

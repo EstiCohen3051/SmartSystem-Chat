@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { Teacher } from 'src/app/Models/Teacher';
 import { Users } from 'src/app/Models/User';
 import { AuthService } from 'src/app/Services/auth/auth.service';
+import { TeachersService } from 'src/app/Services/teacher/teachers.service';
 import { UserService } from 'src/app/Services/user/user.service';
 
 @Component({
@@ -14,16 +15,9 @@ import { UserService } from 'src/app/Services/user/user.service';
 export class EnrollmentComponent {
 
   hide = true;
-  // input: any;
-  teacherDetails?: Teacher;
-
-  // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  // userForm = new FormGroup({
-  //   id: new FormControl(),
-  //   // name: new FormControl,
-  //   // email: new FormControl('', [Validators.required, Validators.email])
-
-  // });
+  input: any;
+  id: string = '';
+  //emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   myGroup = new FormGroup({
     id: new FormControl(),
     firstName: new FormControl(),
@@ -31,8 +25,9 @@ export class EnrollmentComponent {
     address: new FormControl(),
     email1: new FormControl(),
     pass: new FormControl(),
-    tel:new FormControl()
-});
+    tel: new FormControl()
+  });
+  teacherDetails: Teacher | any;
 
   email: any;
   getErrorMessage() {
@@ -41,31 +36,38 @@ export class EnrollmentComponent {
     }
     return this.email.hasError('email') ? 'מייל לא תקין' : '';
   }
-  constructor(public fb: FormBuilder, public authService: AuthService
-  ) {
-
+  constructor(public fb: FormBuilder, public teacherService: TeachersService) {
   }
-  openEnrollment() {
 
-  }
   addTeacher() {
-    //this.teacherDetails?.Teacher_sId = this.myGroup.get('id')?.value
-    console.log(this.myGroup.get('id')?.value);
-    console.log(this.myGroup.get('firstName')?.value);
-    console.log(this.myGroup.get('address')?.value);
-    console.log(this.myGroup.get('lastName')?.value);
-    console.log(this.myGroup.get('email1')?.value);
-    console.log(this.myGroup.get('pass')?.value);
-    console.log(this.myGroup.get('tel')?.value);
-    //this.teacherDetails?.Teacher_sEmail = this.myGroup.get('email');
-   this.authService.setNewTeacher(this.teacherDetails!)
-
-    // const output = document.getElementById('output');
-    // if (output) output.innerHTML = this.email.toString();
-    // this.teacherDetails?.Teacher_sEmail=FormControl.
+    this.teacherDetails = {
+      Teacher_sId: this.myGroup.get('id')?.value,
+      Teacher_sName: this.myGroup.get('firstName')?.value,
+      Teacher_sAddress: this.myGroup.get('address')?.value,
+      Teacher_sLastName: this.myGroup.get('lastName')?.value,
+      Teacher_sEmail: this.myGroup.get('email1')?.value,
+      Teacher_sPassword: this.myGroup.get('pass')?.value,
+      Teacher_sPhone: this.myGroup.get('tel')?.value
+    };
+    this.teacherService.AddNewTeacher(this.teacherDetails!).subscribe(res => {
+      alert("add")
+    })
   }
-  closeDialog() {
-    // <button mat-button mat-dialog-close>Cancel</button>
 
-  }
+  israeliIdValid(): boolean {
+    this.id = this.myGroup.get('id')?.value;
+    if (!/^\d{9}$/.test(this.id)) {
+      return false;
+    }
+    const idDigits = this.id.split("").map(Number);
+    const sum = idDigits.reduce((acc, digit, index) => {
+      let digitSum = digit * ((index % 2) + 1);
+      if (digitSum > 9) {
+        digitSum -= 9;
+      }
+      return acc + digitSum;
+    }, 0);
+
+    return sum % 10 === 0;
+  }  
 }

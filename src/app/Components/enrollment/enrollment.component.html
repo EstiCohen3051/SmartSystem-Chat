@@ -8,10 +8,9 @@
       <mat-label>תעודת זהות </mat-label>
       <input  matInput formControlName="id" required>
       <mat-icon matSuffix>adjust</mat-icon>
-
+      <!-- <mat-error *ngIf="israeliIdValid()==false">{{getErrorMessage()}}</mat-error> -->
     </mat-form-field>
   </div>
-
  
   <div id="d">
     <mat-form-field appearance="fill" class="fieldC">
@@ -40,7 +39,7 @@
       <mat-label>מייל</mat-label>
       <input matInput formControlName="email1" required>
        <!--לבדוק למה אי אפשר לשים בדיקת תקינות  -->
-      <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>   -->
+      <!-- k<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>   -->
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
   </div>
@@ -55,7 +54,7 @@
     </mat-form-field>
   </div>
   <div id="d">
-    <mat-form-field appearance="fill" class="fieldC">
+    <mat-form-field appearance="fill" class="fieldC" required>
       <mat-label>מספר טלפון</mat-label>
       <mat-icon matSuffix>phone</mat-icon>
       <input matInput formControlName="tel">
@@ -63,7 +62,6 @@
      
   </div> 
   <br></div>
-
   <button mat-raised-button (click)="addTeacher()" style="margin-left: 200px;margin-right: 15px; ">שליחה</button>
   <button mat-raised-button mat-dialog-close>ביטול</button>
 </form>

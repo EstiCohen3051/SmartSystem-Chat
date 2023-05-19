@@ -19,7 +19,7 @@ export class AuthService {
     public userEmeil: string = "";
     public type: any;
     TypeUser: any;
-    state: string = 'manager'
+    state: string = 'guess'
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -39,9 +39,8 @@ export class AuthService {
                 localStorage.setItem('user', userString);
                 this.IsLoggedIn$.next(true);
                 this.userId = user.uid;
-                //לבדוק אם יכול להגיע ריק
                 this.userEmeil = user.email || '{}';
-                console.log("enm" + this.userEmeil);
+                console.log("email connection" + this.userEmeil);
                 this.Connection(this.userEmeil).subscribe(
                     x => {
                         if (x.Manager == null && x.Teacher == null) {
@@ -49,9 +48,10 @@ export class AuthService {
                         }
                         else if (x.Manager != null) {
                             this.state = "manager"
-                            router.navigateByUrl('manager')
                         }
-
+                        else if (x.Teacher != null) {
+                            this.state = "teacher"
+                        }
                         console.log(x + "login");
                     }
                 )
@@ -79,6 +79,7 @@ export class AuthService {
     }
 
     public getUserDate(): Observable<User> {
+        debugger;
         return this.userDetails$.asObservable();
     }
     public getUserId(): string {
@@ -91,14 +92,13 @@ export class AuthService {
     private authLogin(provider: firebase.auth.AuthProvider) {
         return this.afAuth.signInWithPopup(provider).then(res => {
             this.IsLoggedIn$.next(true);
-
-
             this.setUserData(res.user as User);
-           // this.router.navigate(['chat'])
         })
     }
     private setUserData(user?: User): Promise<void> | void {
         if (!user) return;
+        console.log(user.uid);
+        
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(
             `users/${user.uid}`
         )
@@ -113,21 +113,14 @@ export class AuthService {
             merge: true
         });
     }
-    setNewTeacher(newTeacher: Teacher) {
-        debugger;
-        console.log(newTeacher);
+    
 
-        return this.http.post<boolean>(
-            "https://localhost:44362/api/Enrollment/AddNewTeacher/", newTeacher
-        )
-    }
+    
     Connection(email: string) {
         console.log(this.userEmeil);
         console.log(email);
-        email = "esticohen3051"
         return this.http.get<Users>(
-
-            `https://localhost:44362/api/Login/Login/${email}`
+            `https://localhost:44362/api/Login/Login?email=${email}`
         );
     }
 }

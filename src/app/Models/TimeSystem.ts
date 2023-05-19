@@ -1,4 +1,4 @@
-class TimeSystem {
+export class TimeSystem {
   NumberTimeSystem: number;
   TeacherId: string;
   LessonNumber: number;
