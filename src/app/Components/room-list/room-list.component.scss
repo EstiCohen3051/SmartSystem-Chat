@@ -1,0 +1,16 @@
+::ng-deep .mat-mdc-list-option:not(._mat-animation-noopable) .mdc-radio__native-control:checked+.mdc-radio__background, .mat-mdc-list-option:not(._mat-animation-noopable) .mdc-radio__native-control:disabled+.mdc-radio__background {
+    transition: opacity 120ms 0ms cubic-bezier(0, 0, 0.2, 1),transform 120ms 0ms cubic-bezier(0, 0, 0.2, 1);
+    display: none;
+}
+::ng-deep.mat-mdc-list-option .mdc-radio__background {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+}
+::ng-deep.mat-mdc-list-option .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: #000;
+    border-color: var(--mdc-radio-unselected-icon-color, #000);
+    display: none;
+}

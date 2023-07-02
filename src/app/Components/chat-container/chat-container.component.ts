@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, ActivationEnd, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,8 @@ import { AddRoomComponent } from '../add-room/add-room.component';
 import 'rxjs/add/observable/of';
 import { Observable, throwError } from 'rxjs'
 import { filter } from 'rxjs/operators';
+import { MessageComponent } from '../message/message.component';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-chat-container',
@@ -17,12 +19,17 @@ import { filter } from 'rxjs/operators';
 })
 
 export class ChatContainerComponent implements OnInit, OnDestroy {
+  @ViewChild("virtualScroll") virtualScroll?: CdkVirtualScrollViewport;
   private subscription: Subscription = new Subscription();
   private userId: string = " ";
   private roomId?: string;
   public rooms$: Observable<Array<IChatRoom>>;
   public messages$?: Observable<Array<IMessage>> = new Observable<Array<IMessage>>;
+  messages: any = []
+  message: any = undefined;
+  flag: boolean = true;
 
+  public emailUser: string = '';
   constructor(
     private chatService: ChatService,
     private auth: AuthService,
@@ -33,7 +40,9 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
     this.rooms$ = this.chatService.getRooms();
     if (activatedRoute.snapshot.url.length > 1) {
       this.roomId = activatedRoute.snapshot.url[1].path;
-      this.messages$ = this.chatService.getRoomMessages(this.roomId);
+      this.chatService.getRoomMessages(this.roomId).subscribe(res => {
+        this.messages = res
+      });
     }
     this.subscription.add(
       router.events.pipe(filter(data => data instanceof NavigationEnd))
@@ -47,9 +56,14 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
     )
 
   }
-
   ngOnInit(): void {
-    debugger;
+    if (this.auth.state === 'teacher') {
+      console.log(this.auth.state);
+      this.flag = false;
+    }
+    if (this.auth.state === 'manager') {
+      this.flag = true;
+    }
 
     this.subscription.add(
       this.auth
@@ -58,11 +72,9 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
         .subscribe(user => {
           this.userId = user.uid;
           console.log(user.uid);
-        })
-      
+        }
+        )
     );
-    console.log(this.userId);
-
     this.subscription.add(
       this.router.events
         .pipe(
@@ -89,14 +101,34 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
   }
   public onAddRoom(roomName: string, userId: string, friends: string[]) {
     console.log(userId);
-    
+
     this.chatService.addRoom(roomName, userId, Object.values(friends));
+  }
+  public getEmailUser() {
+    this.emailUser = this.auth.getEmailUser();
+    alert(this.emailUser)
   }
   public onSendMessage(message: string): void {
     if (this.userId && this.roomId)
-      this.chatService.sendMessage(this.userId, message, this.roomId)
-    this.chatService.Send(message).subscribe(res => {
-      alert(res)
+      this.chatService.sendMessage(this.userId, message, this.roomId);
+    this.chatService.Send(message, this.userId = this.auth.getEmailUser()).subscribe(res => {
+      this.chatService.r = res
+      if (res.dateAbsence.toString() == " ")
+        this.message = "הכנס זמן העדרות ברור יותר"
+      else if (res.typeAbsence == " ")
+        this.message = "הכנס סוג העדרות ברור יותר"
+      else if (res.lessonAbsence == null && res.dateAbsence.toString() != " " && res.typeAbsence != " ")
+        this.message = "לא נמצאו שיעורים מהם ביקשת להעדר";
+      else
+        this.message = "סוג העדרות:  " + res.typeAbsence + "\n" + "בתאריך: " + new Date(res.dateAbsence).toDateString() + "\n" + " לשיעורים " + res.lessonAbsence + "\n"
+      console.log(res);
+      console.log(message);
+      //this.virtualScroll?.scrollToIndex(this._messages.length - 1);
+
     })
+  }
+  getUserId() {
+    // if (this.auth.state == 'teacher')
+    //   return false;
   }
 }

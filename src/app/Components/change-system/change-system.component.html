@@ -1,1 +1,61 @@
-<p>change-system works!</p>
+<!-- <div class="main" dir="rtl">
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: center;">בחר כיתה לצפייה המערכת:</h1>
+  <br>
+  <div id="bc">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle class="s" (click)=" showSystem(item)" *ngFor="let item of classes">{{item}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="wrap-table">
+    <table mat-table [dataSource]="long" class="mat-elevation-z8" *ngIf="arr[0].length">
+      <ng-container *ngFor="let day of displayedColumns;let index=index">
+        <ng-container [matColumnDef]="day">
+          <th mat-header-cell *matHeaderCellDef> {{day}} </th>
+          <td mat-cell class="mat-column" *matCellDef="let element;let i=index">
+            <div *ngIf="arr[index][i]">
+              <span>מורה :{{arr[index][i].teacherId}}
+                <br> מקצוע :{{arr[index][i].subject}}</span>
+            </div>
+          </td>
+        </ng-container>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div> -->
+<div class="main" dir="rtl">
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: center;">בחר כיתה לצפייה המערכת:</h1>
+  <br>
+  <div id="bc">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle class="s" (click)=" showSystem(item)" *ngFor="let item of classes">{{item}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="wrap-table" style="height: 400px; width: 70%;margin: auto;margin-bottom: 40px;">
+  <table mat-table [dataSource]="long" class="mat-elevation-z8" *ngIf="arr[0].length">
+    <ng-container *ngFor="let day of displayedColumns;let index=index">
+      <ng-container [matColumnDef]="day">
+        <th mat-header-cell *matHeaderCellDef> {{day}} </th>
+        <td mat-cell class="mat-column" *matCellDef="let element;let i=index">
+          <div *ngIf="arr[index][i]">
+            <span>מורה :{{arr[index][i].teacherId}}
+            <br>
+            מקצוע :{{arr[index][i].subject}}</span>
+          </div>
+        </td>
+      </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <br>
+  <br><br><br>
+  </div>
+</div>

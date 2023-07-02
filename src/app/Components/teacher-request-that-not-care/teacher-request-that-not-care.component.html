@@ -1,0 +1,12 @@
+<div id="body">
+    <br>
+  <h1 style="text-align: center;">בקשות שטופלו</h1>
+  
+  <div class="detailsRequest" *ngFor="let i of RequestTeacherArr">
+     <p>המורה  {{i!.TeacherName}}</p> <br>
+   <p> ביקש/ה {{i!.Message}}</p>
+   <p>
+    הבקשה טופלה 
+    <mat-icon>check_circle</mat-icon>
+</p>
+  </div></div>

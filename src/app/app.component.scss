@@ -1,13 +1,12 @@
 .story{
-    margin-left: 950px;
+    margin-left:550px;
     font-size: large;
- //   direction: ltr;
 }
 ::ng-deep.mat-mdc-mini-fab.mat-accent {
-        --mdc-fab-container-color: #dad1b0;
-        --mdc-fab-icon-color: #000;
-        --mat-mdc-fab-color: #000;
+ --mdc-fab-container-color: #dad1b0;
+ --mdc-fab-icon-color: #000;
+ --mat-mdc-fab-color: #000;
 }
 .app{
-        overflow-x: hidden
+    overflow-x: hidden
 }

@@ -1,11 +1,9 @@
-class Classes {
+export class Classes {
   ClassesNumber: number;
   ClassName: string;
-  SchoolNumber: number;
 
-  constructor(ClassesNumber: number, ClassName: string, SchoolNumber: number) {
+  constructor(ClassesNumber: number, ClassName: string) {
     this.ClassesNumber = ClassesNumber;
     this.ClassName = ClassName;
-    this.SchoolNumber = SchoolNumber;
   }
 }

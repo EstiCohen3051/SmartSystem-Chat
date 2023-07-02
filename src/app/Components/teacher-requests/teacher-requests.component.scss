@@ -1,0 +1,27 @@
+.detailsRequest{
+    width: 350px;
+    direction: rtl;
+    text-align: center;
+    height:180px;
+    border:solid rgba(203, 237, 237, 0.548) 3px ;
+    border-radius: 7%;
+    margin: 30px;
+    display: inline-block;
+    background-color: aliceblue;
+
+}
+.example-viewport {
+    height: 500px;
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+
+#body{
+    width: 100%;
+    direction: ltr;
+    background-image: url('back.png');
+    background-repeat: round;
+    height:500px;
+    max-height: 500px; ;
+}

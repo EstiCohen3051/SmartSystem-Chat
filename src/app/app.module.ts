@@ -12,8 +12,6 @@ import { MaterialModule } from './material/material.module';
 import { AngularFireModule } from '@angular/fire/compat'
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { StartComponent } from './Components/start/start.component';
-import { LoginComponent } from './Components/login/login.component';
 import { ChatContainerComponent } from './Components/chat-container/chat-container.component';
 import { RoomListComponent } from './Components/room-list/room-list.component';
 import { AddRoomComponent } from './Components/add-room/add-room.component';
@@ -33,26 +31,27 @@ import { EnrollmentComponent } from './Components/enrollment/enrollment.componen
 import { MatInputModule } from '@angular/material/input';
 import { ContactUsComponent } from './Components/contact-us/contact-us.component';
 import { RouterModule } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-
-import * as nodemailer from 'nodemailer';
 import { NewSystemComponent } from './Components/new-system/new-system.component';
 import { PermanentSystemComponent } from './Components/permanent-system/permanent-system.component';
 import { ChangeSystemComponent } from './Components/change-system/change-system.component';
-import { DeleteTeacherComponent } from './Components/delete-teacher/delete-teacher.component';
 import { UpdatingTeacherComponent } from './Components/updating-teacher/updating-teacher.component';
 import { ListTeacherComponent } from './Components/list-teacher/list-teacher.component';
 import { IsDisplayRoomPipe } from './Components/room-list/is-display-room.pipe';
 import { TeacherRequestsComponent } from './Components/teacher-requests/teacher-requests.component';
+import { MessageComponent } from './Components/message/message.component';
+import { SystemFillingComponent } from './Components/system-filling/system-filling.component';
+import { TeacherSystemComponent } from './Components/teacher-system/teacher-system.component';
+import { OptimalTeacherComponent } from './Components/optimal-teacher/optimal-teacher.component';
+import { SystemUploadComponent } from './Components/system-upload/system-upload.component';
+import { saveAs } from 'file-saver';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TeacherRequestThatNotCareComponent } from './Components/teacher-request-that-not-care/teacher-request-that-not-care.component';
+import { ClassesComponent } from './Components/classes/classes.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    StartComponent,
     HeaderComponent,
     ChatContainerComponent,
     RoomListComponent,
@@ -65,11 +64,18 @@ import { TeacherRequestsComponent } from './Components/teacher-requests/teacher-
     NewSystemComponent,
     PermanentSystemComponent,
     ChangeSystemComponent,
-    DeleteTeacherComponent,
     UpdatingTeacherComponent,
     ListTeacherComponent,
     IsDisplayRoomPipe,
     TeacherRequestsComponent,
+    MessageComponent,
+    MessageComponent,
+    SystemFillingComponent,
+    TeacherSystemComponent,
+    OptimalTeacherComponent,
+    SystemUploadComponent,
+    TeacherRequestThatNotCareComponent,
+    ClassesComponent,
   ],
   imports: [
     MatFormFieldModule,
@@ -87,18 +93,20 @@ import { TeacherRequestsComponent } from './Components/teacher-requests/teacher-
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-
+    ReactiveFormsModule,  
     BrowserModule,
+    MatBadgeModule,
     MatFormFieldModule,
     MatButtonModule,
-    ReactiveFormsModule,
     MatDialogModule,
-
+    MatSnackBarModule
   ],
-  exports: [MatFormFieldModule, MatInputModule,IsDisplayRoomPipe],
+  exports: [MatFormFieldModule, MatInputModule, IsDisplayRoomPipe],
   providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() { }
+  constructor() { 
+  }
+  
 }

@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ViewChild } from '@angular/core';
 import { IChatRoom } from 'src/app/Models';
+import { ChatComponent } from '../chat/chat.component';
+import { ChatService } from 'src/app/Services/chat/chat.service';
+import { AuthService } from 'src/app/Services/auth/auth.service';
+import { ChatContainerComponent } from '../chat-container/chat-container.component';
 
 @Component({
   selector: 'app-room-list',
@@ -9,10 +13,23 @@ import { IChatRoom } from 'src/app/Models';
 export class RoomListComponent implements OnInit {
  
   @Input() rooms: Array<IChatRoom> = [];
- 
-  constructor() { }
+  constructor(private service: ChatService
+    , public chat: ChatContainerComponent,
+  public auth:AuthService) { }
  
   ngOnInit(): void {
+ 
   }
+  changeRoom() {
+    this.service.isChooseRoom = true;
+    if (this.auth.state === 'teacher') {
+      console.log(this.auth.state);
+      this.chat.flag = false;
+    }
+    if (this.auth.state === 'manager') {
+      this.chat.flag = true;
+    }
+  }
+  
 
 }

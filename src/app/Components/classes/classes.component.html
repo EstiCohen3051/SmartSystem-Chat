@@ -1,0 +1,7 @@
+<h2 mat-dialog-title dir="rtl">בחר כיתה :</h2>
+<mat-dialog-content>
+    <button mat-raised-button *ngFor="let option of data.options" (click)="onOptionSelected(option.ClassName)" style="margin: 5px;direction: rtl;">{{ option.ClassName}}</button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onDialogClose()">סגור</button>
+</mat-dialog-actions>

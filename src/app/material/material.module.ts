@@ -4,7 +4,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
@@ -15,18 +14,20 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 const modules: any = [MatInputModule,MatDatepickerModule,MatNativeDateModule,
   MatFormFieldModule
-  , MatIconModule, MatButtonModule, MatDialogModule, ScrollingModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatOptionModule, MatInputModule, MatButtonModule, MatFormFieldModule,
-  MatInputModule, MatSelectModule,MatExpansionModule,MatMenuModule,MatTabsModule,MatTableModule]
+  , MatIconModule, MatButtonModule, MatDialogModule, ScrollingModule, MatInputModule, MatFormFieldModule,MatButtonToggleModule, FormsModule, ReactiveFormsModule, MatOptionModule, MatInputModule, MatButtonModule, MatFormFieldModule,
+  MatInputModule,MatAutocompleteModule, MatSelectModule,MatExpansionModule,MatMenuModule,MatTabsModule,MatTableModule]
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ...modules
-  ],
+    ...modules  ],
   exports: modules
 })
 export class MaterialModule { }

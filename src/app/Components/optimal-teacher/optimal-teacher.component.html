@@ -1,0 +1,15 @@
+<div class="all" style="width: 100%;height:350px;">
+  <h1 mat-dialog-title style="text-align: center;">מורה/ים אופטימליים</h1>
+  <h3 style="text-align: center;">אם ברצונך למצוא מורה אופטימלי אחר מהמורה המוצג לחץ על המורה המבוקש</h3>
+  <div *ngFor="let optimalTeachers of OptimalTeachers" mat-dialog-content>
+
+    המורה
+    <button mat-stroked-button [(ngModel)]="a" (click)="findOptimalAgain(optimalTeachers.Teacher.Teacher_sId)">
+      {{optimalTeachers.Teacher.Teacher_sName}}
+      {{optimalTeachers.Teacher.Teacher_sLastName}}
+    </button>
+    נבחרה כמורה מחליף/ה לשיעור {{optimalTeachers.DetailLessons.Subject_}} ביום
+    {{optimalTeachers.DetailLessons.LessonNum_}}<br>
+  </div>
+  <button mat-stroked-button (click)="sendEmailToTeacher()" style="margin-left: center;">אישור</button>
+</div>

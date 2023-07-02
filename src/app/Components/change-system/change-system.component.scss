@@ -1,0 +1,27 @@
+.mat-elevation-z8{
+  direction: rtl;
+}
+#bc{
+  margin: auto; 
+  direction: rtl;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.mat-column{
+  max-width: 60px !important;
+  min-width: 60px !important;
+  border-left: 1px solid grey;
+     }
+  
+.s{
+  width: 70px;
+}
+.main{
+background-image: url('back.png');
+min-height: 650px;
+max-height: 950px;
+width: 100%;
+background-repeat:round;
+}
+

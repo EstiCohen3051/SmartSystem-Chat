@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { Teacher } from 'src/app/Models/Teacher';
 import { Users } from 'src/app/Models/User';
 import { AuthService } from 'src/app/Services/auth/auth.service';
@@ -36,7 +37,7 @@ export class EnrollmentComponent {
     }
     return this.email.hasError('email') ? 'מייל לא תקין' : '';
   }
-  constructor(public fb: FormBuilder, public teacherService: TeachersService) {
+  constructor(public fb: FormBuilder, public teacherService: TeachersService,public dialog: MatDialog) {
   }
 
   addTeacher() {
@@ -47,10 +48,14 @@ export class EnrollmentComponent {
       Teacher_sLastName: this.myGroup.get('lastName')?.value,
       Teacher_sEmail: this.myGroup.get('email1')?.value,
       Teacher_sPassword: this.myGroup.get('pass')?.value,
-      Teacher_sPhone: this.myGroup.get('tel')?.value
+      Teacher_sPhone: this.myGroup.get('tel')?.value,
+      Status:true
     };
+
     this.teacherService.AddNewTeacher(this.teacherDetails!).subscribe(res => {
-      alert("add")
+      alert("add");
+      //הצגת הודעה
+      const dialogRef = this.dialog.closeAll();
     })
   }
 

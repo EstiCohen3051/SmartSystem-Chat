@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Teacher } from 'src/app/Models/Teacher';
 import { TeachersService } from 'src/app/Services/teacher/teachers.service';
+import { MessageComponent } from '../message/message.component';
+import { UpdatingTeacherComponent } from '../updating-teacher/updating-teacher.component';
 
 @Component({
   selector: 'app-list-teacher',
@@ -9,45 +12,67 @@ import { TeachersService } from 'src/app/Services/teacher/teachers.service';
   styleUrls: ['./list-teacher.component.scss']
 })
 export class ListTeacherComponent implements OnInit {
-  dataSource: any[]=[]
-  @ViewChild(MatTable, { static: false }) table:any;
+  dataSource: any[] = []
+  @ViewChild(MatTable, { static: false }) table: any;
 
-  constructor(private teacherService: TeachersService) {
+  constructor(private teacherService: TeachersService, private dialog: MatDialog) {
     teacherService.getAllTeacher().subscribe(
       res => {
-        this.teacher = res
-        this.dataSource = res
+        this.teacher = res;
+        this.dataSource = res;
       })
   }
   ngOnInit(): void {
 
   }
   teacher: Teacher[] = new Array<Teacher>()
-  applyFilter(event: Event) {
-  
-    
+  applyFilterEmail(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log(this.dataSource);
-    console.log(filterValue);
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.dataSource= this.dataSource.filter(item=>item.Teacher_sName.includes(filterValue.trim().toLowerCase()))
-    this.table && this.table.renderRows()
-    console.log(this.dataSource);
-
+    if (filterValue == '') {
+      this.teacherService.getAllTeacher().subscribe(
+        res => {
+          this.teacher = res
+          this.dataSource = res
+        })
+    }
+    this.dataSource = this.dataSource.filter(item => item.Teacher_sEmail.includes(filterValue.trim().toLowerCase()))
   }
-  displayedColumns: string[] = ['name', 'lastName', 'email', 'pass', 'phone', 'address', 'delete',];
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue == '') {
+      this.teacherService.getAllTeacher().subscribe(
+        res => {
+          this.teacher = res
+          this.dataSource = res
+        })
+    }
+    this.dataSource = this.dataSource.filter(item => item.Teacher_sName.includes(filterValue.trim().toLowerCase()))
+  }
+ 
+  displayedColumns: string[] = ['name', 'lastName', 'email', 'phone', 'address', 'delete', 'update'];
   clickedRows = new Set<Teacher>();
+  updateObject(teacher: Teacher) {
+    const dia = this.dialog.open(UpdatingTeacherComponent, {
+      data: { teacher1: teacher }
+    });
+  }
   deleteObject(teacher: Teacher) {
-    console.log(teacher);
-    this.teacherService.deleteTeacher(teacher).subscribe(
-      res => {
-        alert("delete")
-        this.teacherService.getAllTeacher().subscribe(
+    const dia = this.dialog.open(MessageComponent, {
+      data: { message: "האם אתה בטוח שברצונך למחוק את המורה:" + teacher.Teacher_sName + " " + teacher.Teacher_sLastName }
+    });
+    dia.afterClosed().subscribe(result => {
+      if (result) {
+        this.teacherService.deleteTeacher(teacher).subscribe(
           res => {
-            this.teacher = res
-            this.dataSource = res
+            this.teacherService.getAllTeacher().subscribe(
+              res => {
+                this.teacher = res
+                this.dataSource = res
+              })
           })
       }
-    )
+    });
+
   }
 }

@@ -1,1 +1,54 @@
-<p>updating-teacher works!</p>
+<div class="updateTeacher">
+    <h1 style="margin-top: 50px;margin-left: 200px;">עדכון פרטי מורה</h1>
+    <mat-form-field class="example-form-field">
+        <mat-label>תעודת זהות</mat-label>
+        <input matInput type="text"  [disabled]="true"  [(ngModel)]="teacherDetails!.Teacher_sId">
+    </mat-form-field>
+     <mat-form-field class="example-form-field">
+        <mat-label>שם פרטי</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sName">
+        <button *ngIf="teacherDetails!.Teacher_sName" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sName=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+   <mat-form-field class="example-form-field">
+        <mat-label>שם משפחה</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sLastName">
+        <button *ngIf="teacherDetails!.Teacher_sLastName" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sLastName=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+        <mat-label>כתובת</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sAddress">
+        <button *ngIf="teacherDetails!.Teacher_sAddress" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sAddress=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+   
+    <mat-form-field class="example-form-field">
+        <mat-label>מייל</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sEmail">
+        <button *ngIf="teacherDetails!.Teacher_sEmail" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sEmail=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+        <mat-label>סיסמא</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sPassword">
+        <button *ngIf="teacherDetails!.Teacher_sPassword" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sPassword=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+ <mat-form-field class="example-form-field">
+        <mat-label>טלפון</mat-label>
+        <input matInput type="text" [(ngModel)]="teacherDetails!.Teacher_sPhone">
+        <button *ngIf="teacherDetails!.Teacher_sPhone" matSuffix mat-icon-button aria-label="Clear" (click)="teacherDetails!.Teacher_sPhone=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button (click)="updateTeacher()" style="margin-left: 200px;margin-right: 15px; ">שליחה</button>
+    <button mat-raised-button mat-dialog-close>ביטול</button>
+  
+</div> 

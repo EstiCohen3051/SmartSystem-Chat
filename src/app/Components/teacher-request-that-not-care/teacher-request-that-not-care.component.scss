@@ -1,0 +1,19 @@
+.detailsRequest{
+    width: 400px;
+    direction: rtl;
+    text-align: center;
+    height:200px;
+    border:solid rgb(203, 237, 237) 3px ;
+    border-radius: 7%;
+    margin: 30px;
+    display: inline-block;
+    background-color: aliceblue;
+}
+#body{
+    width: 100%;
+    direction: ltr;
+    background-color: rgba(243, 188, 116, 0);
+    background-image: url('back.png');
+    background-repeat: round;
+    height:500px;
+}

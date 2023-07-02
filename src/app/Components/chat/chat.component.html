@@ -1,20 +1,31 @@
-<div class="chat" *ngIf="messages">
+<div class="chat" >
     <div class="chat__screen">
         <div class="chat__massages">
+            <div *ngIf="!chatService.isChooseRoom" id="choseRoom">
+                <h1 style="text-align: center;"> <b>בחר חדר להתחלת שיחה </b></h1>
+            </div>
             <cdk-virtual-scroll-viewport appendOnly itemSize="15" class="chat__scroller" #virtualScroll
                 style="height: 323px;">
-                <div *cdkVirtualFor="let message of messages" class="chat__message" [ngClass]="{
-                            'chat__message--current-user':userId===message.userId ,
-                             'chat__message--other-user':userId != message.userId}">
-                    {{message.body}}
-                    {{message. userId}}
+                <div *cdkVirtualFor="let oneMessage of messages" class="chat__message" [ngClass]="{
+                            'chat__message--current-user':userId===oneMessage.userId ,
+                             'chat__message--other-user':userId != oneMessage.userId}">
+                    {{oneMessage.body}}
+                    <!-- {{oneMessage.userId}} -->
+                </div>
+                <div *ngIf="message" class="chat__message">
+                    {{message}}
+                    <div class="buttons">
+                        <button mat-button (click)="close()">ביטול</button>
+                        <button mat-button (click)="sendToManager()">אישור</button>
+                    </div>
                 </div>
             </cdk-virtual-scroll-viewport>
             <div class="chat__form">
                 <mat-form-field class="example-full-width" style="width:970px;">
                     <input #newMessage matInput placeholder="הודעה" />
                 </mat-form-field>
-                <button mat-mini-fab color="primary" (click)="sendMessage(newMessage.value,newMessage)">
+                <button mat-mini-fab color="primary" (click)="sendMessage(newMessage.value,newMessage)"
+                    style="background-color: rgba(207, 149, 189, 0.671);">
                     <mat-icon>send</mat-icon>
                 </button>
             </div>

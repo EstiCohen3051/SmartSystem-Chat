@@ -13,26 +13,21 @@ import { ChatService } from 'src/app/Services/chat/chat.service';
 export class AddRoomComponent implements OnInit {
   arr: string[] = [''];
   friends$: Observable<any> = NEVER;
-
   form: FormGroup = new FormGroup({
   });
   constructor(private chat: ChatService, public dialogRef: MatDialogRef<AddRoomComponent>, private formBuilder: FormBuilder) {
-
   }
   ngOnInit(): void {
     this.friends$ = this.chat.getAllUsers()
     this.form.addControl(
-      'friend0', new FormControl('')
-    )
+    'friend0', new FormControl('') )
   }
   public closeModal(): void {
     this.dialogRef.close();
   }
   pushFriend() {
     this.form.addControl(
-      'friend' + this.arr.length, new FormControl('')
-    )
+      'friend' + this.arr.length, new FormControl('') )
     this.arr.push('')
-
   }
 }

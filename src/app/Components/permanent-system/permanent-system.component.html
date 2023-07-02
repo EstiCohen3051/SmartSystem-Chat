@@ -1,38 +1,32 @@
-
-  
-  <table mat-table [dataSource]="TimeSystem" class="mat-elevation-z8">
- 
-    <ng-container matColumnDef="Sunday">
-      <th mat-header-cell *matHeaderCellDef> ראשון </th>
-      <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+<div class="main" dir="rtl">
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: center;">בחר כיתה לצפייה המערכת:</h1>
+  <br>
+  <div id="bc">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle class="s" (click)=" showSystem(item)" *ngFor="let item of classes">{{item}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="wrap-table" style="height: 400px; width: 70%;margin: auto;margin-bottom: 40px;">
+  <table mat-table [dataSource]="long" class="mat-elevation-z8" *ngIf="arr[0].length">
+    <ng-container *ngFor="let day of displayedColumns;let index=index">
+      <ng-container [matColumnDef]="day">
+        <th mat-header-cell *matHeaderCellDef> {{day}} </th>
+        <td mat-cell class="mat-column" *matCellDef="let element;let i=index">
+          <div *ngIf="arr[index][i]">
+            <span>מורה :{{arr[index][i].teacherId}}
+            <br>
+            מקצוע :{{arr[index][i].subject}}</span>
+          </div>
+        </td>
+      </ng-container>
     </ng-container>
-  
-    <ng-container matColumnDef="Monday">
-      <th mat-header-cell *matHeaderCellDef> שני </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="Tuesday">
-      <th mat-header-cell *matHeaderCellDef> שלישי </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
-    <ng-container matColumnDef="Wednesday">
-      <th mat-header-cell *matHeaderCellDef> רביעי </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container>
-   <ng-container matColumnDef="Thursday">
-    <th mat-header-cell *matHeaderCellDef> חמישי </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-
-</ng-container> 
-<ng-container matColumnDef="Friday">
-  <th mat-header-cell *matHeaderCellDef>  שישי </th>
-  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-
-</ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-    <!-- Row shown when there is no matching data. -->
-    
   </table>
+  <br>
+  <br><br><br>
+  </div>
+</div>

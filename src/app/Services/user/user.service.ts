@@ -13,5 +13,5 @@ export class UserService {
   //     `https://localhost:44362/api/Login/Login/${email}`
   //   );
   // }
-  
+
 }

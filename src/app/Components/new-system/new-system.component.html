@@ -1,9 +1,20 @@
-    <input #fileInput type="file"  >
+<div id="bc">
+  <br>
+  <br>
+  <h1 style="text-align: center;">בחר כיתה להעלאת המערכת:</h1>
 
-    <p style="padding: 30px;">
-        <mat-icon>add</mat-icon>
-        EXCEL בחר קובץ
-    </p>
+  <br>
+  <br>
+  <div class="f">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle class="s" (click)="saveClass(item)" *ngFor="let item of classes">{{item}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+<!-- <input #fileInput type="file" class="center" >     -->
 
-
-<button (click)="Add(fileInput)">ok</button> 
+<!-- <button (click)="Add(fileInput)" class="center1">אישור</button> -->
+<!-- <p style="padding: 30px;">
+    <mat-icon>add</mat-icon>
+    EXCEL בחר קובץ
+</p> -->

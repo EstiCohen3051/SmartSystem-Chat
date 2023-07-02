@@ -9,12 +9,16 @@
         text-decoration: none;
       }
 }
+.mune{
+  width: 100%;
+   display: flex;  
+  
+}
 #button_space{
   margin: auto;
 
 }
 .img{
-  background-image: url('./image.png');
   width: 150px;
   height: 150px;
 }

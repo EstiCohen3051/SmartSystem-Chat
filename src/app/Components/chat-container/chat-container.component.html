@@ -1,16 +1,14 @@
-<div class="chat-container" style="display: flex;">
+<div class="chat-container" style="display: flex; background-image: url('back.png');background-repeat: round;" >
   <div class="chat-container__room-list" *ngIf="rooms$ |async as rooms">
     <div>
-    <div class="chat-containner__add-room">
-      <button type="button" mat-raised-button color="primary" (click)="openAddRoomModal()" style="margin: 20px;"> הוספת חדר</button>
+    <div class="chat-containner__add-room" *ngIf="flag">
+      <button type="button" mat-raised-button color="primary"  (click)="openAddRoomModal()" style="margin: 20px;background-color: rgba(207, 149, 189, 0.671);    width:150px;"> הוספת חדר</button>
     </div>
       <app-room-list  [rooms]="rooms">
       </app-room-list>
     </div>
-    <div class="chat-contaniner__chat" *ngIf="messages$ |async as messages">
-      <app-chat [messages]="messages" (onSendMessage)="onSendMessage($event)"></app-chat>
+    <div class="chat-contaniner__chat" >
+      <app-chat [messages]="messages" [message]="message" (onSendMessage)="onSendMessage($event)"></app-chat>
     </div>
   </div>
 </div>
-<ng-template *ngIf=""></ng-template>
-<div class="h" style="width: 150px;height: 150px; background-color: rgb(62, 109, 109);"></div>

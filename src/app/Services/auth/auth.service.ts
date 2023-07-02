@@ -25,13 +25,11 @@ export class AuthService {
         private afAuth: AngularFireAuth,
         private router: Router,
         private http: HttpClient,
-        //  private teacher:Teacher
     ) {
         const savedUserString = localStorage.getItem('user')
         if (savedUserString != null) {
             this.IsLoggedIn$.next(true);
         }
-
         afAuth.authState.subscribe(user => {
             if (!!user) {
                 this.userDetails$.next(<User>user);
@@ -44,13 +42,15 @@ export class AuthService {
                 this.Connection(this.userEmeil).subscribe(
                     x => {
                         if (x.Manager == null && x.Teacher == null) {
-                            this.router.navigateByUrl('signUp')
+                            alert('guess')
+                            this.state = "guess";
                         }
                         else if (x.Manager != null) {
                             this.state = "manager"
                         }
                         else if (x.Teacher != null) {
                             this.state = "teacher"
+                            localStorage.setItem('teacher',JSON.stringify(x.Teacher))
                         }
                         console.log(x + "login");
                     }
@@ -79,7 +79,6 @@ export class AuthService {
     }
 
     public getUserDate(): Observable<User> {
-        debugger;
         return this.userDetails$.asObservable();
     }
     public getUserId(): string {
@@ -87,7 +86,6 @@ export class AuthService {
     }
     public getEmailUser(): string {
         return this.userEmeil;
-
     }
     private authLogin(provider: firebase.auth.AuthProvider) {
         return this.afAuth.signInWithPopup(provider).then(res => {
@@ -98,7 +96,7 @@ export class AuthService {
     private setUserData(user?: User): Promise<void> | void {
         if (!user) return;
         console.log(user.uid);
-        
+
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(
             `users/${user.uid}`
         )
@@ -107,15 +105,14 @@ export class AuthService {
             email: user.email,
             displayName: user.displayName,
             photoURL: user.photoURL,
-
         };
         return userRef.set(userData, {
             merge: true
         });
     }
-    
-
-    
+    userEmail(): string {
+        return this.userEmail.toString();
+    }
     Connection(email: string) {
         console.log(this.userEmeil);
         console.log(email);

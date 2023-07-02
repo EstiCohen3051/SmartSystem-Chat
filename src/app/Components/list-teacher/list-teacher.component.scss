@@ -1,6 +1,26 @@
 ::ng-deep .mdc-data-table__table{
-    min-width: 50%!important;
-    width: 50%!important;
+    min-width: 60%!important;
+    width: 30%!important;
+margin: auto;
 
 }
- 
+.ty{
+    background-image: url('back.png');
+    width: 100%;
+    height: 600px;
+    background-repeat: round;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    .search{
+        height: 80px!important;
+        width: 25%!important;
+        display:block;
+        margin-top: 20px;
+        margin-left: 20px;
+        display: inline;
+    }
+}

@@ -1,1 +1,9 @@
-<p>teacher-requests works!</p>
+<div id="body">
+  <h1 style="text-align: center;">בקשות הממתינות לאישור</h1>
+    <div class="detailsRequest" *ngFor="let i of RequestTeacherArr">
+      <p>המורה {{i!.TeacherName}} מבקש/ת :
+        <br>{{i!.Message}} </p>
+      <button mat-raised-button (click)="findTeacher(i)">לאישור הבקשה ומציאת מורה אופטימלי</button><br> <br>
+      <button mat-raised-button (click)="rejectionRequest(i.IdRequest)">לדחיית הבקשה</button>
+    </div>
+</div>

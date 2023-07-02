@@ -1,17 +1,16 @@
 <body style="direction: rtl;">
+  <form action="contactForm">
+    <div id="h">
+      <div class="b">
+        <br>
+        <div class="aa"> צור קשר</div>
+        <div class="bb"> הצטרפו עכשיו למערכת Smart- system</div>
+        <!-- <div class="de"></div> -->
 
-  <div id="h">
-    <div class="b">
-      <br>
-      <div class="aa"> צור קשר</div>
-      <div class="bb"> הצטרפו עכשיו למערכת Smart- system</div>
-      <!-- <div class="de"></div> -->
-
-      <div class="details">
-        <p id="di1">לפרטים נוספים,<br></p>
-        <p id="di"> מלאו את הטופס ונחזור אליכם בהקדם...</p>
-        <form class="example-form">
-          <form action="contactForm">
+        <div class="details">
+          <p id="di1">לפרטים נוספים,<br></p>
+          <p id="di"> מלאו את הטופס ונחזור אליכם בהקדם...</p>
+          <form class="example-form">
             <mat-form-field class="example-full-width">
               <input matInput placeholder="שם מלא" formControlName="fullName">
             </mat-form-field>
@@ -27,9 +26,11 @@
             </mat-form-field>
             <br>
           </form>
-          <button mat-button style="width: 400px; margin-left: 50px;background-color: beige;">שלח</button>
-        </form>
+          <button mat-button (click)="send()"
+            style="width: 400px; margin-left: 50px;background-color: beige;">שלח</button>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
+
 </body>
