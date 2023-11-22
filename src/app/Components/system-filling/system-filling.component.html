@@ -1,7 +1,9 @@
-<div class="bake" style="background-image:url('back.png') ;width: 100%;height: 600px; background-repeat:round;">
+<div class="bake" style="background-image:url('back.png') ;width: 100%;height: 600px; background-repeat:round; ">
   <br><br>
   <h1 style="text-align: center;direction: rtl;">מילוי מערכת אונליין:</h1><br>
-  <button mat-stroked-button style="width: 250px;margin-left: 67%; background-color: rgba(250, 235, 215, 0.685);"  (click)="openDialog()">בחר כיתה להעלאת המערכת</button>
+  <button mat-stroked-button style="width: 250px; background-color: rgba(250, 235, 215, 0.685);    margin-left: 54.7%;
+  margin-right: 10px; "  (click)="openDialog()">בחר כיתה להעלאת המערכת</button>
+  <button mat-stroked-button style="width: 150px; background-color: rgba(250, 235, 215, 0.685); margin:auto;" (click)="addClass()" >הוספת כיתה  </button>
   <div class="wrap-table">
     <table dir="rtl" mat-table [dataSource]="lessons" class="mat-elevation-z8">
       <ng-container matColumnDef="שיעור">
@@ -14,7 +16,7 @@
           <form [formGroup]="form[index*6+i]">
             <mat-form-field class="example-full-width" id="aa">
               <mat-label>מורה</mat-label>
-              <input type="text" matInput formControlName="subject" [matAutocomplete]="auto1">
+              <input type="text" matInput formControlName="teacher" [matAutocomplete]="auto1">
               <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
                 <mat-option *ngFor="let option1 of filteredOptions1 | async" [value]="option1">
                   {{option1}}

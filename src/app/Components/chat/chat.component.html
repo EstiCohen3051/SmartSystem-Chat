@@ -14,7 +14,7 @@
                 </div>
                 <div *ngIf="message" class="chat__message">
                     {{message}}
-                    <div class="buttons">
+                    <div class="buttons"  *ngIf="message !=a">
                         <button mat-button (click)="close()">ביטול</button>
                         <button mat-button (click)="sendToManager()">אישור</button>
                     </div>

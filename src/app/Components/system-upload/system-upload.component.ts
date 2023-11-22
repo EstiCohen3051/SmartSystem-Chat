@@ -19,11 +19,12 @@ export class SystemUploadComponent {
     this.system.addNewSystem(
       fileInput.files![0]).subscribe(
         res => {
-          this.snackBar.open('המערכת עלתה בהצלחה', 'סגור', {
-            duration: 2000000, // משך ההודעה במילישניות
-          })
+          if (res)
+            this.snackBar.open('המערכת עלתה בהצלחה', 'סגור', {
+              duration: 2000000, // משך ההודעה במילישניות
+            })
         }
-    )
+      )
     close();
   }
 }

@@ -24,7 +24,7 @@ export class
   }
   isChooseRoom: boolean = false
 
-  r: RetMessage | undefined
+  r: RetMessage[] = [];
   arr: Array<IChatRoom> = new Array<IChatRoom>()
 
   public getRooms(): Observable<Array<IChatRoom>> {
@@ -98,7 +98,6 @@ export class
     console.log(userId);
     console.log(body);
     console.log(id);
-
     this._db.collection('rooms').doc(id).collection('messages').add({
       body,
       userId,
@@ -115,10 +114,11 @@ export class
     )
   }
   public Send(m: string, t: string) {
-    return this.httpClient.get<RetMessage>(`https://localhost:44362/api/Messages/SendMessage?m=${m}&t=${t}`)
+    return this.httpClient.get<RetMessage[]>(`https://localhost:44362/api/Messages/SendMessage?m=${m}&t=${t}`)
   }
   public OkMessage(id: string, m: string) {
     id = this.auth.getEmailUser();
+console.log(this.r);
     return this.httpClient.post<boolean>(`https://localhost:44362/api/Messages/OkMessage?id=${id}&m=${m}`, this.r);
   }
 }

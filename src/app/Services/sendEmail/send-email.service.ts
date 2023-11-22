@@ -10,8 +10,11 @@ export class SendEmailService {
 
     
   }
+  sendD(email: string, subject: string, content: string) {
+    return this.http.get<boolean>(`https://localhost:44362/api/SendEmail/sendD?email=${email.trim()}&subject=${subject}&content=${content}`);
+
+  }
   sendEmail(email: string, subject: string, content: string) {
-    debugger
     return this.http.get<boolean>(`https://localhost:44362/api/SendEmail/SendEmail?email=${email.trim()}&subject=${subject}&content=${content}`);
   }
 }

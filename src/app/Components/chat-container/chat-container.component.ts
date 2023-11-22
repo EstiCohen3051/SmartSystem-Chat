@@ -11,7 +11,8 @@ import { Observable, throwError } from 'rxjs'
 import { filter } from 'rxjs/operators';
 import { MessageComponent } from '../message/message.component';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-
+import { forEach } from 'lodash';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-chat-container',
   templateUrl: './chat-container.component.html',
@@ -30,13 +31,15 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
   flag: boolean = true;
 
   public emailUser: string = '';
-  constructor(
+  constructor(private datePipe: DatePipe,
     private chatService: ChatService,
     private auth: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog
   ) {
+    const  options = { month: 'short', day: 'numeric', year: 'numeric' };
+
     this.rooms$ = this.chatService.getRooms();
     if (activatedRoute.snapshot.url.length > 1) {
       this.roomId = activatedRoute.snapshot.url[1].path;
@@ -106,25 +109,32 @@ export class ChatContainerComponent implements OnInit, OnDestroy {
   }
   public getEmailUser() {
     this.emailUser = this.auth.getEmailUser();
-    alert(this.emailUser)
   }
   public onSendMessage(message: string): void {
     if (this.userId && this.roomId)
       this.chatService.sendMessage(this.userId, message, this.roomId);
     this.chatService.Send(message, this.userId = this.auth.getEmailUser()).subscribe(res => {
       this.chatService.r = res
-      if (res.dateAbsence.toString() == " ")
+      if (res.length == 0) {
+        this.message = " ההודעה לא הובנה אנא נסה שוב";
+      }
+      else {
+        if (res[0].dateAbsence.toString() == '01/01/0001') 
         this.message = "הכנס זמן העדרות ברור יותר"
-      else if (res.typeAbsence == " ")
+      else if (res[0].typeAbsence == " ")
         this.message = "הכנס סוג העדרות ברור יותר"
-      else if (res.lessonAbsence == null && res.dateAbsence.toString() != " " && res.typeAbsence != " ")
+      else if (res[0].lessonAbsence == null && res[0].dateAbsence.toString() != " " && res[0].typeAbsence != " ")
         this.message = "לא נמצאו שיעורים מהם ביקשת להעדר";
-      else
-        this.message = "סוג העדרות:  " + res.typeAbsence + "\n" + "בתאריך: " + new Date(res.dateAbsence).toDateString() + "\n" + " לשיעורים " + res.lessonAbsence + "\n"
-      console.log(res);
-      console.log(message);
-      //this.virtualScroll?.scrollToIndex(this._messages.length - 1);
-
+     
+      }
+      if (res.length != 0) {
+        this.message = "סוג העדרות:  " + res[0].typeAbsence + "\n"
+        res.forEach(element => {
+         
+          this.message += "בתאריך: " +  this.datePipe.transform(element.dateAbsence, 'MM dd') + "\n" + " לשיעורים " + element.lessonAbsence + "\n"
+        });
+        console.log(res);
+      }
     })
   }
   getUserId() {

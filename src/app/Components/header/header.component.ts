@@ -11,6 +11,10 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { saveAs } from 'file-saver';
 import { RequestService } from 'src/app/Services/request/request.service';
 import { RequestTeacher } from 'src/app/Models/RequestTeacher';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -27,7 +31,7 @@ export class HeaderComponent implements OnInit {
     this.hidden = !this.hidden;
   }
 
-  constructor(private chatService: ChatService, private router: Router, public requestService: RequestService,
+  constructor(private chatService: ChatService,private http: HttpClient, private router: Router, public requestService: RequestService,
     public autService: AuthService, public dialog: MatDialog) {
     this.isLoggedIn$ = autService.isLoggedIn();
 
@@ -72,16 +76,37 @@ export class HeaderComponent implements OnInit {
 
   public downloadFile(): void {
 
-    scripts: ["./node_modules/file-saver/FileSaver.js"]
+    // scripts: ["./node_modules/file-saver/FileSaver.js"]
 
-    const filePath = "../../environments/aa"
-    const fileName = 'תבנית_מערכת.xlsx';
-    const anchor = document.createElement('a');
-    anchor.href = filePath;
-    anchor.download = fileName;
-    document.body.appendChild(anchor);
-    anchor.click();
-  }
+    // const filePath = "../../environments/aa"
+    // const fileName = 'תבנית_מערכת.xlsx';
+    // const anchor = document.createElement('a');
+    // anchor.href = filePath;
+    // anchor.download = fileName;
+    // document.body.appendChild(anchor);
+    // anchor.click();
+    const data = [
+      " "
+        // Your data array here
+      ];
+  
+      // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+      // const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  
+      const fileUrl = 'path/to/the/file/aa.xlsx'; 
+      const fileName = 'תבנית מערכת.xlsx'; 
+      fetch(fileUrl)
+        .then((response) => response.blob())
+        .then((blob) => saveAs(blob, fileName))
+        .catch((error) => console.error('Error downloading the file:', error));
+     }
+
+    
+  
+ 
+  
+  
+  
   public onAddUser(displayName: string, email: string, photoURL: string) {
     // this.chatService.addUser()
   }

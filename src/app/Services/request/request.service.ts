@@ -33,7 +33,8 @@ export class RequestService {
   rejectionRequest(idr:number) {
     return this.http.get<boolean>(`https://localhost:44362/api/Request/rejectionRequest?id=${idr}`);
   }
-  UpdateChange(o:optimalResult[],idr:number) {
+  UpdateChange(o: optimalResult[], idr: number) {
+    
     return this.http.post<boolean>(`https://localhost:44362/api/Messages/UpdateChange?idr=${idr}`,o);
   }
 }

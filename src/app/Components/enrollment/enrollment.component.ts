@@ -53,7 +53,6 @@ export class EnrollmentComponent {
     };
 
     this.teacherService.AddNewTeacher(this.teacherDetails!).subscribe(res => {
-      alert("add");
       //הצגת הודעה
       const dialogRef = this.dialog.closeAll();
     })

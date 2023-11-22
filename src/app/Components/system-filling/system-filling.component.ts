@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { forEach } from 'lodash';
+import { add, forEach } from 'lodash';
 import { Observable, observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Lesson } from 'src/app/Models/Lesson';
@@ -11,6 +11,7 @@ import { Day, TimeSystem } from 'src/app/Models/TimeSystem';
 import { SystemService } from 'src/app/Services/system/system.service';
 import { ClassesComponent } from '../classes/classes.component';
 import { Classes } from 'src/app/Models/Classes';
+import { AddClassComponent } from '../add-class/add-class.component';
 
 @Component({
   selector: 'app-system-filling',
@@ -92,17 +93,15 @@ export class SystemFillingComponent implements OnInit {
   i = 0; num = 0
   ok() {
     this.arr = new Array<TimeSystem>()
-
     this.form.forEach((item, index) => {
       console.log(item.value)
-      debugger
       if (item.value.subject != "") {
         this.num = (this.days.findIndex(a => a == item.value.day) + 1) * (this.lessons.findIndex(a => a == item.value.lesson) + 1)
         this.arr.push(new TimeSystem(0, this.teacher.find(a => a.Teacher_sName + " " + a.Teacher_sLastName == item.value.teacher)!?.Teacher_sId, this.num, 1, "", item.value.subject, item.value.day, item.value.teacher, true))
-        this.arr[this.i].ClassNumber = 1
+        this.arr[this.i].ClassNumber = parseInt( this.c)
       }
     })
-    this.serviceSystem.addNewSystemFill(this.arr).subscribe(res => {
+    this.serviceSystem.addNewSystemFill(this.arr, this.c).subscribe(res => {
       if (res)
         this.snackBar.open('המערכת נוספה בהצלחה', 'סגור', {
           duration: 2000, // משך ההודעה במילישניות
@@ -110,7 +109,19 @@ export class SystemFillingComponent implements OnInit {
     }
     )
   }
+  addClass() {
+    const dialogRef1 = this.dialog.open(AddClassComponent, {
+      width: '400px',
+      height:'250px',
+      //data: { options: this.classes }
+    });
 
+    dialogRef1.afterClosed().subscribe(result => {
+      this.c = result;
+      console.log(this.c);
+
+    });
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(ClassesComponent, {
       width: '400px',

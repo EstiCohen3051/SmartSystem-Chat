@@ -1,0 +1,21 @@
+<h1 style="text-align: center;">הוספת כיתה</h1>
+<div class="i">
+<mat-form-field class="example-form-field" style="margin-bottom: 50px;margin-top: 50px;">
+    <mat-label style="font-size: medium;">שם כיתה</mat-label>
+    <input matInput type="text" [(ngModel)]="value">
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <br><br>
+  <mat-form-field class="example-form-field"  style="    
+  margin-bottom: 50px;    
+  margin-top: 50px;">
+    <mat-label style="    font-size: medium;">הכיתה במספר</mat-label>
+    <input matInput type="text" [(ngModel)]="value1">
+    <button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+  <button mat-stroked-button style="margin: auto; display: block;"(click)="addC()">אישור</button>

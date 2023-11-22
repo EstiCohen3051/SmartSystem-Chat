@@ -22,12 +22,12 @@ export class PermanentSystemComponent {
     system.getClasses().subscribe(res => {
       this.classes = res;
     })
-
   }
 
   public showSystem(item: string) {
     this.system.GetTimeForClass(item).subscribe(
       res => {
+        this.TimeSystemTable = null;
         this.TimeSystemTable = res;
         console.log(this.TimeSystemTable);
         res.forEach(element => {
@@ -41,7 +41,6 @@ export class PermanentSystemComponent {
         res.map(item => {
           if (item.Day.toString() == '6') {
             console.log(item);
-            
           }
         })
         res.map((item, index) => {
@@ -52,8 +51,8 @@ export class PermanentSystemComponent {
           else {
             this.arr[item.Day] = [...this.arr[item.Day], { teacherId: item.TeacherId, subject: item.Subject }]
           }
-          this.long =new Array(10)
-           // new Array(Math.max(...this.arr.map(item => +item.length))).fill(0)
+          this.long = new Array(10)
+          // new Array(Math.max(...this.arr.map(item => +item.length))).fill(0)
         })
       })
   }

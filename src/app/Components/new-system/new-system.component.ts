@@ -27,6 +27,7 @@ export class NewSystemComponent implements OnInit{
   // }
   saveClass(s:string) {
     this.s = s;
+    this.system.cn=s
     this.d.open(SystemUploadComponent, {
       width: '350px',
       height:'250px'

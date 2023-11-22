@@ -16,6 +16,7 @@ export class AuthService {
     private IsLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private userDetails$: Subject<User> = new Subject<User>();
     private userId: string = "";
+    
     public userEmeil: string = "";
     public type: any;
     TypeUser: any;

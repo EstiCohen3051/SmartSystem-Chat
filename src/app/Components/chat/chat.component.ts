@@ -24,6 +24,8 @@ export class ChatComponent implements OnInit {
   @Input() message: any;
   private _messages: Array<IMessage> = [];
   public userId: string;
+  m = "";
+  a: string = "";
   get messages() {
     return this._messages;
   }
@@ -32,19 +34,24 @@ export class ChatComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log(this.userId)
+     this.a=" ההודעה לא הובנה אנא נסה שוב"
+
   }
   public sendMessage(message: string, input: HTMLInputElement): void {
     console.log(this.messages);
     this.onSendMessage.emit(message);
     console.log(message + " message");
     input.value = "";
+    this.m=message
   }
   sendToManager() {
-    this.chatService.OkMessage(this.userId,this.message).subscribe(res => {
+    console.log(this.m);
+    
+    this.chatService.OkMessage(this.userId,this.m).subscribe(res => {
       console.log(res);
+      
       this.message = "";
       this._snackBar.open("ההודעה נשלחה בהצלחה", "סגירה");
-
     });
   }
   close() {

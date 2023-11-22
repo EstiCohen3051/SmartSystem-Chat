@@ -24,7 +24,7 @@ export class TeacherRequestsComponent implements OnInit {
       console.log(res);
       
       res.forEach(element => {
-        if (element.Processed == false) {
+        if (element.Processed == false&&element.Message!="טופלה") {
           this.RequestTeacherArr.push(element);
           console.log(element);
         }
@@ -47,12 +47,12 @@ export class TeacherRequestsComponent implements OnInit {
     this.requestService.findTeacher(i).subscribe(res => {
       console.log(res);
       console.log(this.OptimalTeacherArr);
-      this.openDialog('300ms', '150ms')
+      this.openDialog('0ms', '0ms')
     })
   }
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(OptimalTeacherComponent, {
-      width: '550px',
+      width: '600px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

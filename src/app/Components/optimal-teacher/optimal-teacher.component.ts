@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { optimalResult } from 'src/app/Models/optimalResult';
 import { Teacher } from 'src/app/Models/Teacher';
 import { ChatService } from 'src/app/Services/chat/chat.service';
@@ -14,10 +15,13 @@ export class OptimalTeacherComponent {
   OptimalTeachers: optimalResult[] = [];
   a!: optimalResult;
   arrString: string[] = [];
-  constructor(private chat: ChatService, public request: RequestService,
-    public dialog: MatDialog) {
+  constructor(private chat: ChatService, public request: RequestService,public snackBar:MatSnackBar
+    ,public dialog: MatDialog) {
     request.findTeacher(request.r1).subscribe(res => {
-      this.OptimalTeachers = res;
+      if (res == null)
+        alert("המורה ביקש מספר רב של שיעורים מהם רוצה להעדר אנא דאג מורה ממלא מקום")
+                this.OptimalTeachers = res;
+        
     })
   }
 
@@ -28,7 +32,7 @@ export class OptimalTeacherComponent {
     this.request.findTeacher(this.request.r1).subscribe(
       res => {
         if (res == null) {//if not have teacher that can change
-          alert("לא נמצא מורה אופטימלי אנא פנה למורה ממלא מקום")
+          alert(" לא נמצא מורה אופטימלי אנא פנה למורה ממלא מקום")
           this.dialog.closeAll();
         }
         else {
@@ -49,13 +53,17 @@ export class OptimalTeacherComponent {
 
   }
   sendEmailToTeacher() {
-    this.request.UpdateChange(this.OptimalTeachers,this.request.r1.IdRequest).subscribe(res => {
+    this.request.UpdateChange(this.OptimalTeachers, this.request.r1.IdRequest).subscribe(res => {
       if (res) {
+        console.log(res);
+        this.snackBar.open('השינוים נקלטו בהצלחה', 'סגור', {
+          duration: 2000, // משך ההודעה במילישניות
+        });
         this.OptimalTeachers.forEach(item => {
           this.chat.getRooms().subscribe(rooms => {
             this.chat.sendMessage(item.Teacher.Teacher_sEmail, item.Teacher.Teacher_sName + ' ' + item.Teacher.Teacher_sLastName +
               '  נבחרה כמורה מחליף/ה לשיעור ' + item.DetailLessons.Subject_ + ' ביום ' + item.DetailLessons.LessonNum_
-              + 'המורה', rooms.filter(room => { return !!(room!.friends[0] as string == item!.Teacher!.Teacher_sEmail as string && (room.roomName as string) != 'מורים' as string) })[0].id)
+              + 'המורה', rooms[0].id)
           })
         })
       }

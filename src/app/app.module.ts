@@ -19,6 +19,8 @@ import { HomeComponent } from './Components/home/home.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { DatePipe } from '@angular/common';
+
 import { ChatComponent } from './Components/chat/chat.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/add/observable/of';
@@ -44,11 +46,14 @@ import { TeacherSystemComponent } from './Components/teacher-system/teacher-syst
 import { OptimalTeacherComponent } from './Components/optimal-teacher/optimal-teacher.component';
 import { SystemUploadComponent } from './Components/system-upload/system-upload.component';
 import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
+
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TeacherRequestThatNotCareComponent } from './Components/teacher-request-that-not-care/teacher-request-that-not-care.component';
 import { ClassesComponent } from './Components/classes/classes.component';
+import { AddClassComponent } from './Components/add-class/add-class.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +81,7 @@ import { ClassesComponent } from './Components/classes/classes.component';
     SystemUploadComponent,
     TeacherRequestThatNotCareComponent,
     ClassesComponent,
+    AddClassComponent,
   ],
   imports: [
     MatFormFieldModule,
@@ -99,10 +105,12 @@ import { ClassesComponent } from './Components/classes/classes.component';
     MatFormFieldModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
   ],
   exports: [MatFormFieldModule, MatInputModule, IsDisplayRoomPipe],
-  providers: [ScreenTrackingService, UserTrackingService],
+  providers: [ScreenTrackingService, UserTrackingService,    DatePipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -43,12 +43,12 @@
     <ng-container *ngFor="let day of displayedColumns;let index=index">
       <ng-container [matColumnDef]="day">
         <th mat-header-cell *matHeaderCellDef> {{day}} </th>
-        <td mat-cell class="mat-column" *matCellDef="let element;let i=index">
+        <td mat-cell class="mat-column" *matCellDef="let element;let i=index" >
           <div *ngIf="arr[index][i]">
             <span>מורה :{{arr[index][i].teacherId}}
             <br>
             מקצוע :{{arr[index][i].subject}}</span>
-          </div>
+            </div>
         </td>
       </ng-container>
     </ng-container>

@@ -16,9 +16,9 @@ export class RoomListComponent implements OnInit {
   constructor(private service: ChatService
     , public chat: ChatContainerComponent,
   public auth:AuthService) { }
- 
+ userid:string=""
   ngOnInit(): void {
- 
+ this.userid= this.auth.getEmailUser().toString()
   }
   changeRoom() {
     this.service.isChooseRoom = true;

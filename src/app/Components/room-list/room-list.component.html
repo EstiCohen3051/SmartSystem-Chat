@@ -1,7 +1,9 @@
 <div class="rooms">
   <mat-selection-list [multiple]="false">
-    <ng-container *ngFor="let room of rooms" >
-      <mat-list-option (click)="changeRoom()" [value]="room" [routerLink]="['/chat',room.id]"  *ngIf="">
+    <ng-container *ngFor="let room of rooms">
+      <mat-list-option (click)="changeRoom()" [value]="room" [routerLink]="['/chat',room.id]"
+        *ngIf="room.createUserId==userid ||room.friends.includes(userid)">
+        
         {{room.roomName}}
       </mat-list-option>
     </ng-container>

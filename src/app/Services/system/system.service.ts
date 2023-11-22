@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { TimeSystem } from '../../Models/TimeSystem';
 import { Teacher } from 'src/app/Models/Teacher';
 import { Classes } from 'src/app/Models/Classes';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SystemService {
-
+cn=""
   constructor(private http: HttpClient) { }
 
   getSystem() {
@@ -29,13 +30,14 @@ export class SystemService {
     console.log("i reached the service");
     const formData: FormData = new FormData();
     formData.append('file', file!);
+    formData.append('class', this.cn);
     console.log(formData);
     return this.http.post<boolean>('https://localhost:44362/api/TimeSystem/addNewSystem', formData);
   }
-  addNewSystemFill(t: TimeSystem[]) {
-    console.log(t.length);
+  addNewSystemFill(t: TimeSystem[],c:string) {
+    alert(c)
     
-    return this.http.post<boolean>('https://localhost:44362/api/TimeSystem/addNewSystemFill', t);
+    return this.http.post<boolean>(`https://localhost:44362/api/TimeSystem/addNewSystemFill?c=${c}`, t);
   }
   public getClasses() {
     return this.http.get<string[]>('https://localhost:44362/api/TimeSystem/GetClasses')
@@ -48,5 +50,8 @@ export class SystemService {
   }
   public getSubject() {
     return this.http.get<string[]>('https://localhost:44362/api/TimeSystem/GetSubject')
+  }
+  public addClass(na: string, nu: number): Observable<boolean> {
+    return this.http.get<boolean>(`https://localhost:44362/api/TimeSystem/addClass/${na},${nu}`)
   }
 }
